@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vui Học Chính Tả  🌸</title>
+    <title>Vui Học Chính Tả cùng Cục Vàng 🌸</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        /* --- PHONG CÁCH PASTEL KAWAII --- */
+        /* --- PHONG CÁCH PASTEL KAWAII SIÊU SINH ĐỘNG --- */
         :root {
             --bg-color: #FFF0F5; /* Lavender Blush */
             --primary-color: #FFB6C1; /* Light Pink */
             --secondary-color: #E0F7FA; /* Light Cyan */
             --text-color: #4A4A4A;
-            --correct-color: #A5D6A7; /* Pastel Green */
-            --incorrect-color: #EF9A9A; /* Pastel Red */
+            --correct-color: #C8E6C9; /* Pastel Green */
+            --incorrect-color: #FFCDD2; /* Pastel Red */
             --accent-color: #FFF59D; /* Pastel Yellow */
         }
 
@@ -24,6 +24,9 @@
 
         body {
             background-color: var(--bg-color);
+            background-image: radial-gradient(#ffebf0 20%, transparent 20%), radial-gradient(#effbfa 20%, transparent 20%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
             color: var(--text-color);
             margin: 0;
             padding: 20px;
@@ -35,24 +38,69 @@
         }
 
         .container {
-            background: white;
-            border-radius: 24px;
-            padding: 30px;
-            box-shadow: 0 8px 24px rgba(255, 182, 193, 0.4);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 35px 25px;
+            box-shadow: 0 12px 30px rgba(255, 182, 193, 0.5);
             width: 100%;
             max-width: 600px;
             text-align: center;
-            border: 4px solid var(--primary-color);
+            border: 5px solid var(--primary-color);
             position: relative;
             overflow: hidden;
             margin-bottom: 15px;
+            backdrop-filter: blur(5px);
         }
 
         h1 {
             color: #FF69B4;
-            font-size: 26px;
+            font-size: 28px;
             margin-top: 0;
             margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* --- ĐỒNG HỒ ĐẾM NGƯỢC & ĐỘNG LỰC --- */
+        .countdown-box {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFF3CD 100%);
+            border: 2px dashed #FFC107;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.15);
+            animation: pulse 2s infinite ease-in-out;
+        }
+        .countdown-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #D39E00;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-weight: bold;
+        }
+        .time-segment {
+            background: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            color: #BD2130;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-size: 16px;
+        }
+        .motivation-text {
+            font-size: 13px;
+            color: #614800;
+            font-style: italic;
+            margin-top: 10px;
+            font-weight: 500;
+            line-height: 1.4;
         }
 
         /* --- STREAK & KỶ LỤC WIDGET --- */
@@ -60,20 +108,20 @@
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         .stats-badge {
             background-color: #FFF;
             border: 2px solid #FFE0B2;
-            padding: 5px 15px;
+            padding: 6px 16px;
             border-radius: 20px;
             font-size: 14px;
             font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            gap: 6px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
         }
 
         /* --- LƯU Ý LUÔN HIỆN --- */
@@ -81,7 +129,7 @@
             background-color: #FFF3E0;
             border: 1px dashed #FFB74D;
             color: #E65100;
-            padding: 10px 15px;
+            padding: 12px 15px;
             border-radius: 12px;
             font-size: 13px;
             font-weight: bold;
@@ -89,22 +137,23 @@
             max-width: 600px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 10px;
             animation: fadeIn 0.5s ease;
         }
 
-        /* --- THANH ĐIỀU KHIỂN (TRANG CHỦ / TẠM DỪNG) --- */
+        /* --- THANH ĐIỀU KHIỂN --- */
         .quiz-controls {
             display: flex;
             justify-content: space-between;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .control-btn {
             background-color: #FFF;
             border: 2px solid var(--primary-color);
             color: #FF69B4;
-            padding: 8px 16px;
+            padding: 8px 18px;
             font-size: 14px;
             border-radius: 50px;
             cursor: pointer;
@@ -123,7 +172,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             animation: fadeIn 0.5s ease;
         }
 
@@ -156,110 +205,140 @@
         }
 
         /* --- PROGRESS BAR --- */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #FF69B4;
+            font-size: 14px;
+        }
+
         .progress-bar {
             background-color: #F0F0F0;
             border-radius: 12px;
-            height: 12px;
-            width: 100%;
-            margin-bottom: 20px;
+            height: 14px;
+            flex-grow: 1;
             overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .progress {
-            background-color: var(--primary-color);
+            background: linear-gradient(90deg, var(--primary-color), #FF69B4);
             height: 100%;
             width: 0%;
             transition: width 0.3s ease;
         }
 
         .question-box {
-            font-size: 20px;
+            font-size: 21px;
             font-weight: bold;
             margin-bottom: 25px;
-            padding: 15px;
+            padding: 20px;
             background-color: var(--secondary-color);
-            border-radius: 16px;
-            border: 2px dashed #4DD0E1;
+            border-radius: 20px;
+            border: 3px dashed #4DD0E1;
+            color: #006064;
+            line-height: 1.4;
         }
 
         .options-container {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
 
         .option-btn {
             background-color: white;
-            border: 2px solid #E0E0E0;
-            border-radius: 16px;
-            padding: 15px 20px;
+            border: 2px solid #EAEAEA;
+            border-radius: 18px;
+            padding: 16px 22px;
             font-size: 18px;
             cursor: pointer;
             transition: all 0.2s ease;
             text-align: left;
-            font-weight: 500;
+            font-weight: bold;
+            color: var(--text-color);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.02);
         }
 
         .option-btn:hover {
             background-color: #FFF9C4;
             border-color: #FFF59D;
             transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
         }
 
         .option-btn.correct {
             background-color: var(--correct-color) !important;
             border-color: #81C784 !important;
-            color: #1B5E20;
+            color: #1B5E20 !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%232E7D32' d='M21 7L9 19l-5.5-5.5l1.41-1.41L9 16.17L19.59 5.58z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 45px;
         }
 
         .option-btn.incorrect {
             background-color: var(--incorrect-color) !important;
             border-color: #E57373 !important;
-            color: #B71C1C;
+            color: #B71C1C !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23C62828' d='M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 45px;
         }
 
         /* --- GIẢI THÍCH --- */
         .explanation-box {
             margin-top: 25px;
             padding: 20px;
-            border-radius: 16px;
+            border-radius: 18px;
             background-color: #FFFDE7;
             border: 2px solid var(--accent-color);
             display: none;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.4s ease;
             text-align: left;
         }
 
         .next-btn, .action-btn {
-            margin-top: 20px;
-            background-color: #FF69B4;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 14px 35px;
             font-size: 18px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
             transition: all 0.2s;
         }
 
         .next-btn:hover, .action-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(255, 105, 180, 0.5);
+            box-shadow: 0 7px 20px rgba(255, 105, 180, 0.6);
         }
 
         .btn-wrong-practice {
-            background-color: #FF9800 !important;
-            box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3) !important;
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%) !important;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4) !important;
         }
         .btn-wrong-practice:hover {
-            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.5) !important;
+            box-shadow: 0 7px 20px rgba(255, 152, 0, 0.6) !important;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+            100% { transform: scale(1); }
         }
 
         /* Modal */
@@ -274,33 +353,46 @@
         }
         .modal-content {
             background: white;
-            padding: 25px;
-            border-radius: 20px;
+            padding: 30px;
+            border-radius: 24px;
             width: 90%;
             max-width: 400px;
-            border: 3px solid var(--primary-color);
+            border: 4px solid var(--primary-color);
             text-align: center;
+            animation: fadeIn 0.3s ease;
         }
 
         .screen { display: none; }
         .active-screen { display: block; }
         
-        .score { font-size: 48px; font-weight: bold; color: #FF69B4; margin: 20px 0; }
-        .cheer-text { font-size: 22px; font-weight: bold; color: #4CAF50; margin-bottom: 20px; }
+        .score { font-size: 56px; font-weight: bold; color: #FF69B4; margin: 15px 0; text-shadow: 2px 2px 0px #FFF0F5; }
+        .cheer-text { font-size: 22px; font-weight: bold; color: #4CAF50; margin-bottom: 25px; padding: 0 10px; }
     </style>
 </head>
 <body>
 
     <div class="container">
+        
+        <div class="countdown-box" id="countdown-widget">
+            <div class="countdown-title">⏰ Đếm Ngược Thi VACT Đợt 2 (24/5)</div>
+            <div class="countdown-timer">
+                <div class="time-segment"><span id="cd-d">00</span> ngày</div>
+                <div class="time-segment"><span id="cd-h">00</span> giờ</div>
+                <div class="time-segment"><span id="cd-m">00</span> phút</div>
+                <div class="time-segment"><span id="cd-s">00</span> giây</div>
+            </div>
+            <div class="motivation-text" id="motivation-quote">Đang tải lời chúc động lực... ✨</div>
+        </div>
+
         <div id="setup-screen" class="screen active-screen setup-screen">
             <h1>Hôm nay học mấy từ nè? 🌸</h1>
             
             <div class="stats-badge-container">
                 <div class="stats-badge" title="Số ngày học liên tiếp chuẩn chỉ">🔥 <span id="streak-val">0</span> Ngày</div>
-                <div class="stats-badge" title="Kỷ lục điểm số cao nhất của cậu">🏆 Kỷ lục: <span id="highscore-val">0/0</span></div>
+                <div class="stats-badge" id="highscore-badge" title="Kỷ lục điểm số cao nhất của cậu">🏆 Kỷ lục: <span id="highscore-val">0</span></div>
             </div>
 
-            <p style="font-size: 15px; color: #777; margin: 0 10px;">Chọn số lượng câu hỏi để cùng bứt phá chính tả nhé cục vàng!</p>
+            <p style="font-size: 15px; color: #666; margin: 5px 10px 0 10px; font-weight: 500;">Chọn số lượng câu hỏi để cùng bứt phá chính tả nhé cục vàng!</p>
             <div class="select-group">
                 <button class="select-btn active" onclick="setCount(20, this)">20 Từ</button>
                 <button class="select-btn" onclick="setCount(50, this)">50 Từ</button>
@@ -316,15 +408,20 @@
                 <button class="control-btn" id="pause-btn" onclick="togglePause()">⏸️ Tạm dừng</button>
             </div>
             <h1 id="title-quiz">Thử Thách Chính Tả 📝✨</h1>
-            <div class="progress-bar">
-                <div class="progress" id="progress"></div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div id="progress-text">0/0</div>
             </div>
+
             <div class="question-box" id="question">Đang tải câu hỏi...</div>
             <div class="options-container" id="options"></div>
             
             <div class="explanation-box" id="explanation-box">
-                <strong style="color: #E65100;">💡 Giải thích từ đúng:</strong>
-                <p id="explanation-text"></p>
+                <strong style="color: #E65100; font-size: 16px;">💡 Giải thích từ đúng:</strong>
+                <p id="explanation-text" style="font-size: 16px; margin: 8px 0 0 0; line-height: 1.4;"></p>
                 <br>
                 <button class="next-btn" id="next-btn" onclick="nextQuestion()">Câu tiếp theo 🐾</button>
             </div>
@@ -346,15 +443,14 @@
         ⚠️ CÓ THỂ SAI, NẾU PHÁT HIỆN SAI SÓT NHẮN TUI NHA! 💬
     </div>
     <div class="sticky-note">
-        CHO TUI XIN THÊM TỪ ĐỂ CÙNG NHAU HỌC NHE <3 💬
+        CHO TUI XIN THÊM TỪ ĐỂ CÙNG NHAU HỌC NHE &lt;3 💬
     </div>
-
 
     <div class="modal" id="pauseModal" style="z-index: 11;">
         <div class="modal-content">
             <h2 style="color: #FF69B4; margin-top:0;">⏸️ Đang Tạm Dừng</h2>
-            <p>Trò chơi đang dừng lại một chút. Khi nào sẵn sàng thì chúng mình học tiếp nhé!</p>
-            <button class="action-btn" style="width:100%;" onclick="togglePause()">Tiếp tục học ngay 🐾</button>
+            <p style="color: #666; font-weight: 500;">Trò chơi đang dừng lại một chút. Khi nào sẵn sàng thì chúng mình học tiếp nhé!</p>
+            <button class="action-btn" style="width:100%; margin-top: 10px;" onclick="togglePause()">Tiếp tục học ngay 🐾</button>
         </div>
     </div>
 
@@ -365,7 +461,7 @@
             { correct: "Chín muồi", wrong: "Chín mùi", example: "Điều kiện đã chín muồi để thực hiện kế hoạch." },
             { correct: "Chín chắn", wrong: "Chỉnh chắc", example: "Suy nghĩ của cô ấy rất chín chắn." },
             { correct: "Chỉn chu", wrong: "Chỉnh chu", example: "Ăn mặc chỉn chu trước khi ra ngoài." },
-            { correct: "Tròng trành", wrong: "Chòng chành", example: "Chiếc thuyền tròng trành trên sóng nước." },
+            { correct: "Tròng trành", wrong: "Chòng chành", example: "Chi chiếc thuyền tròng trành trên sóng nước." },
             { correct: "Chua xót", wrong: "Chua sót", example: "Cảm giác chua xót khi nhìn thấy cảnh nghèo khó." },
             { correct: "Chẩn đoán", wrong: "Chuẩn đoán", example: "Bác sĩ chẩn đoán bệnh rất chính xác." },
             { correct: "Cọ xát", wrong: "Cọ sát", example: "Học sinh cần cọ xát qua nhiều kỳ thi thử." },
@@ -506,11 +602,21 @@
             { correct: "Viễn vọng", wrong: "Viển vọng", example: "Kính viễn vọng dùng để quan sát các vì sao." }
         ];
 
+        // Danh sách câu nói truyền động lực thi cử ngẫu nhiên
+        const motivationQuotes = [
+            "Còn 4 ngày nữa là chiến đấu rồi, cố lên cục vàng ơi! 🏆",
+            "Mỗi từ học hôm nay là một bước tiến gần hơn đến điểm 10 VACT! 🎯",
+            "VACT Đợt 2 không làm khó được thiên tài chính tả đâu nhe! 🔥",
+            "Học chăm chỉ rồi tui dẫn đi ăn kem nhé bạn iu! 🍦🌸",
+            "Đừng nản chí nhé, cậu đang làm tốt lên từng ngày đó! ✨",
+            "Kỳ thi VACT Đợt 2 sắp tới, hãy tỏa sáng rực rỡ nào! 🌟"
+        ];
+
         let database = [...defaultQuestions];
         let quizQuestions = [];
         let wrongQuestions = [];
         let currentQuestionIndex = 0;
-        let score = 0;
+        let score = 0; // Đếm số câu đúng thực tế
         let answered = false;
         let selectedCount = 20;
         let isPaused = false;
@@ -518,7 +624,43 @@
 
         window.onload = function() {
             updateStatsUI();
+            initCountdown();
+            changeMotivationQuote();
         };
+
+        // --- HÀM ĐỒNG HỒ ĐẾM NGƯỢC ---
+        function initCountdown() {
+            // Đặt ngày đích: Ngày 24 tháng 5 năm 2026
+            const targetDate = new Date("May 24, 2026 00:00:00").getTime();
+
+            function updateTimer() {
+                const now = new Date().getTime();
+                const difference = targetDate - now;
+
+                if (difference <= 0) {
+                    document.getElementById("countdown-widget").innerHTML = "<div class='countdown-title' style='color:#DC3545;'>🔥 GIỜ G ĐÃ ĐẾN! Chúc bạn iu thi VACT đạt kết quả xuất sắc nhất! 🎉</div>";
+                    return;
+                }
+
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById("cd-d").innerText = String(days).padStart(2, '0');
+                document.getElementById("cd-h").innerText = String(hours).padStart(2, '0');
+                document.getElementById("cd-m").innerText = String(minutes).padStart(2, '0');
+                document.getElementById("cd-s").innerText = String(seconds).padStart(2, '0');
+            }
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        function changeMotivationQuote() {
+            const randomIndex = Math.floor(Math.random() * motivationQuotes.length);
+            document.getElementById("motivation-quote").innerText = motivationQuotes[randomIndex];
+        }
 
         function updateStatsUI() {
             let lastLearnDate = localStorage.getItem('lastLearnDate');
@@ -529,4 +671,255 @@
                 const lastDate = new Date(lastLearnDate);
                 const today = new Date(todayStr);
                 const diffTime = Math.abs(today - lastDate);
-                const diffDays = Math.ceil(diffTime / (1000
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                if (diffDays > 1) {
+                    currentStreak = 0;
+                    localStorage.setItem('studyStreak', '0');
+                }
+            }
+            document.getElementById('streak-val').innerText = currentStreak;
+
+            let highscore = localStorage.getItem('highScore') || "0/0";
+            document.getElementById('highscore-val').innerText = highscore;
+        }
+
+        // Âm thanh báo hiệu sinh động bằng Web Audio API
+        function playSound(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.25);
+                } else {
+                    osc.frequency.setValueAtTime(220, ctx.currentTime); // A3
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.25);
+                }
+            } catch (e) { console.log("Audio error:", e); }
+        }
+
+        function triggerConfetti() {
+            var duration = 2.5 * 1000;
+            var end = Date.now() + duration;
+            (function frame() {
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 } });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 } });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function setCount(count, btn) {
+            selectedCount = count;
+            document.querySelectorAll('.select-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function goToSetup() {
+            updateStatsUI();
+            changeMotivationQuote();
+            document.getElementById('result-screen').classList.remove('active-screen');
+            document.getElementById('quiz-screen').classList.remove('active-screen');
+            document.getElementById('setup-screen').classList.add('active-screen');
+        }
+
+        function goHome() {
+            if (confirm("Bạn muốn hủy lượt học này và quay về trang chủ không?")) {
+                goToSetup();
+            }
+        }
+
+        function togglePause() {
+            isPaused = !isPaused;
+            document.getElementById('pauseModal').style.display = isPaused ? 'flex' : 'none';
+        }
+
+        function startQuiz() {
+            isWrongPracticeMode = false;
+            shuffleArray(database);
+            let count = selectedCount === 'all' ? database.length : Math.min(selectedCount, database.length);
+            quizQuestions = database.slice(0, count);
+
+            currentQuestionIndex = 0;
+            score = 0; 
+            wrongQuestions = [];
+            isPaused = false;
+
+            document.getElementById('setup-screen').classList.remove('active-screen');
+            document.getElementById('result-screen').classList.remove('active-screen');
+            document.getElementById('quiz-screen').classList.add('active-screen');
+
+            loadQuestion();
+        }
+
+        function startWrongPractice() {
+            isWrongPracticeMode = true;
+            shuffleArray(wrongQuestions);
+            quizQuestions = [...wrongQuestions];
+
+            currentQuestionIndex = 0;
+            score = 0; 
+            wrongQuestions = [];
+            isPaused = false;
+
+            document.getElementById('result-screen').classList.remove('active-screen');
+            document.getElementById('quiz-screen').classList.add('active-screen');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answered = false;
+            document.getElementById('explanation-box').style.display = 'none';
+            
+            let q = quizQuestions[currentQuestionIndex];
+            
+            // Cập nhật Progress Bar & Text đếm số câu chuẩn chỉnh
+            let progressPercent = (currentQuestionIndex / quizQuestions.length) * 100;
+            document.getElementById('progress').style.width = `${progressPercent}%`;
+            document.getElementById('progress-text').innerText = `${currentQuestionIndex + 1}/${quizQuestions.length}`;
+            
+            if(isWrongPracticeMode) {
+                document.getElementById('question').innerHTML = `🎯 <b>Ôn tập từ sai:</b> Hãy chọn phương án viết ĐÚNG chính tả:`;
+            } else {
+                document.getElementById('question').innerText = `Từ nào dưới đây viết ĐÚNG chính tả? 🤔`;
+            }
+
+            let options = [
+                { text: q.correct, isCorrect: true },
+                { text: q.wrong, isCorrect: false }
+            ];
+            shuffleArray(options);
+
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = `🌸 ${opt.text}`;
+                btn.onclick = () => selectOption(btn, opt.isCorrect);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedBtn, isCorrect) {
+            if (answered || isPaused) return;
+            answered = true;
+
+            let q = quizQuestions[currentQuestionIndex];
+
+            if (isCorrect) {
+                selectedBtn.classList.add('correct');
+                playSound('correct');
+                score++; 
+            } else {
+                selectedBtn.classList.add('incorrect');
+                playSound('wrong');
+                wrongQuestions.push(q);
+
+                // Highlight câu đúng lên cho bé nhận biết
+                Array.from(document.getElementById('options').children).forEach(btn => {
+                    if (btn.innerText.includes(q.correct)) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+
+            document.getElementById('explanation-text').innerHTML = `Từ viết đúng chuẩn là: <b>"${q.correct}"</b>.<br>✨ <i>Ví dụ: ${q.example}</i>`;
+            document.getElementById('explanation-box').style.display = 'block';
+        }
+
+        function nextQuestion() {
+            if (isPaused) return;
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('quiz-screen').classList.remove('active-screen');
+            document.getElementById('result-screen').classList.add('active-screen');
+            
+            // Sửa lỗi hiển thị điểm 0/0
+            document.getElementById('final-score').innerText = `${score}/${quizQuestions.length}`;
+            
+            let percentage = (score / quizQuestions.length) * 100;
+            let cheer = "";
+            
+            if (percentage === 100) {
+                cheer = "Tuyệt đỉnh xuất sắc! Cậu đạt điểm tối đa rồi, VACT Đợt 2 thẳng tiến thôi! 👑🏆";
+                triggerConfetti();
+            } else if (percentage >= 80) {
+                cheer = "Kết quả rất tốt! Cậu làm chuẩn chỉnh lắm nha! ⭐🌸";
+                triggerConfetti();
+            } else if (percentage >= 50) {
+                cheer = "Khá tốt rồi nè! Cố gắng luyện tập thêm chút nữa để bứt phá nhé cục vàng! 💕";
+            } else {
+                cheer = "Đừng buồn nha, cùng bấm nút phía dưới để ôn lại các từ vừa sai nào! 💪✨";
+            }
+            document.getElementById('cheer-text').innerText = cheer;
+
+            if (!isWrongPracticeMode) {
+                // Xử lý kỷ lục cá nhân
+                let oldHighScoreStr = localStorage.getItem('highScore') || "0/0";
+                let oldHighScoreCorrect = parseInt(oldHighScoreStr.split('/')[0]) || 0;
+                
+                if (score > oldHighScoreCorrect) {
+                    localStorage.setItem('highScore', `${score}/${quizQuestions.length}`);
+                }
+
+                // Tính toán số ngày học liên tiếp (Streak)
+                let lastLearnDate = localStorage.getItem('lastLearnDate');
+                let currentStreak = parseInt(localStorage.getItem('studyStreak') || '0');
+                const todayStr = new Date().toDateString();
+
+                if (lastLearnDate !== todayStr) {
+                    if (lastLearnDate) {
+                        const lastDate = new Date(lastLearnDate);
+                        const today = new Date(todayStr);
+                        const diffTime = Math.abs(today - lastDate);
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                        if (diffDays === 1) {
+                            currentStreak += 1;
+                        } else if (diffDays > 1) {
+                            currentStreak = 1;
+                        }
+                    } else {
+                        currentStreak = 1;
+                    }
+                    localStorage.setItem('studyStreak', currentStreak);
+                    localStorage.setItem('lastLearnDate', todayStr);
+                }
+            }
+
+            const retryWrongBtn = document.getElementById('btn-retry-wrong');
+            if (wrongQuestions.length > 0) {
+                retryWrongBtn.innerText = `🎯 Ôn Lại Danh Sách ${wrongQuestions.length} Từ Sai`;
+                retryWrongBtn.style.display = 'block';
+            } else {
+                retryWrongBtn.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
