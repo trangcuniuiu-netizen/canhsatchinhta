@@ -55,6 +55,38 @@
             margin-bottom: 20px;
         }
 
+        /* --- Ô NHẬP TÊN BẮT BUỘC --- */
+        .name-input-group {
+            width: 100%;
+            max-width: 320px;
+            margin: 15px 0 5px 0;
+            text-align: left;
+        }
+        .name-input-group label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #FF69B4;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .name-input-field {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 2px solid var(--primary-color);
+            font-size: 16px;
+            outline: none;
+            color: #4A4A4A;
+            font-weight: bold;
+            text-align: center;
+            background-color: #FFF9FA;
+        }
+        .name-input-field:focus {
+            border-color: #FF69B4;
+            background-color: #FFF;
+            box-shadow: 0 0 8px rgba(255, 105, 180, 0.2);
+        }
+
         /* --- STREAK & KỶ LỤC WIDGET --- */
         .stats-badge-container {
             display: flex;
@@ -77,7 +109,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        /* Nút xem bảng xếp hạng toàn cầu */
+        /* Nút xem bảng xếp hạng tiến bộ */
         .btn-rank-global {
             background-color: #E1F5FE;
             border: 2px solid #4FC3F7;
@@ -138,7 +170,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             animation: fadeIn 0.5s ease;
         }
 
@@ -148,7 +180,7 @@
             gap: 12px;
             width: 100%;
             max-width: 320px;
-            margin: 15px 0;
+            margin: 10px 0;
         }
 
         .select-btn {
@@ -195,6 +227,23 @@
             background-color: var(--secondary-color);
             border-radius: 16px;
             border: 2px dashed #4DD0E1;
+        }
+
+        /* --- LIVE SCORE LIVE BADGE --- */
+        .live-score-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .live-score-badge {
+            background: #FFFDE7;
+            border: 2px solid #FFF59D;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 15px;
+            color: #E65100;
         }
 
         .options-container {
@@ -347,8 +396,11 @@
         .screen { display: none; }
         .active-screen { display: block; }
         
-        .score { font-size: 48px; font-weight: bold; color: #FF69B4; margin: 20px 0; }
+        .score { font-size: 48px; font-weight: bold; color: #FF69B4; margin: 15px 0; }
         .cheer-text { font-size: 22px; font-weight: bold; color: #4CAF50; margin-bottom: 20px; }
+        
+        .improvement-badge { font-size: 16px; color: #388E3C; font-weight: bold; background: #E8F5E9; padding: 6px 18px; border-radius: 15px; display: inline-block; margin-bottom: 10px; border: 1px solid #C8E6C9; }
+        .regression-badge { font-size: 16px; color: #D32F2F; font-weight: bold; background: #FFEBEE; padding: 6px 18px; border-radius: 15px; display: inline-block; margin-bottom: 10px; border: 1px solid #FFCDD2; }
     </style>
 </head>
 <body>
@@ -357,15 +409,20 @@
         <button class="add-q-btn" onclick="openModal()" title="Thêm từ mới vào kho nè!">➕</button>
         
         <div id="setup-screen" class="screen active-screen setup-screen">
-            <h1>Hôm nay học mấy từ nè? 🌸</h1>
+            <h1>Vui Học Chính Tả Cùng Bé 🌸</h1>
             
             <div class="stats-badge-container">
                 <div class="stats-badge" title="Số ngày học liên tiếp chuẩn chỉ">🔥 <span id="streak-val">0</span> Ngày</div>
-                <div class="stats-badge" title="Kỷ lục điểm số cao nhất của cậu">🏆 Kỷ lục: <span id="highscore-val">0/0</span></div>
-                <button class="stats-badge btn-rank-global" onclick="openRankModal()">👑 Bảng Xếp Hạng</button>
+                <div class="stats-badge" title="Kỷ lục điểm số cao nhất của cậu">🏆 Kỷ lục: <span id="highscore-val">0</span> Điểm</div>
+                <button class="stats-badge btn-rank-global" onclick="openRankModal()">📈 BXH Tiến Bộ</button>
             </div>
 
-            <p style="font-size: 15px; color: #777; margin: 0 10px;">Chọn số lượng câu hỏi để cùng bứt phá chính tả nhé cục vàng!</p>
+            <div class="name-input-group">
+                <label for="player-name-field">✨ Nhập tên của bạn trước nhé (Bắt buộc):</label>
+                <input type="text" id="player-name-field" class="name-input-field" placeholder="Ví dụ: Cục vàng của anh 💖" maxlength="30">
+            </div>
+
+            <p style="font-size: 14px; color: #777; margin: 5px 10px 0 10px;">Chọn số lượng câu hỏi để cùng bứt phá chính tả:</p>
             <div class="select-group">
                 <button class="select-btn active" onclick="setCount(20, this)">20 Từ</button>
                 <button class="select-btn" onclick="setCount(50, this)">50 Từ</button>
@@ -381,9 +438,16 @@
                 <button class="control-btn" id="pause-btn" onclick="togglePause()">⏸️ Tạm dừng</button>
             </div>
             <h1 id="title-quiz">Thử Thách Chính Tả 📝✨</h1>
+            
             <div class="progress-bar">
                 <div class="progress" id="progress"></div>
             </div>
+
+            <div class="live-score-container">
+                <div class="live-score-badge" style="background: #E3F2FD; border-color: #90CAF9; color: #0D47A1;">👤 Người học: <span id="live-name-val">...</span></div>
+                <div class="live-score-badge">🌟 Điểm: <span id="live-score-val">100</span></div>
+            </div>
+
             <div class="question-box" id="question">Đang tải câu hỏi...</div>
             <div class="options-container" id="options"></div>
             
@@ -396,8 +460,9 @@
         </div>
 
         <div id="result-screen" class="screen">
-            <h1>🎉 Kết Quả Của Cậu Nè! 🎉</h1>
-            <div class="score" id="final-score">0/0</div>
+            <h1 id="result-title-name">🎉 Kết Quả Của Cậu Nè! 🎉</h1>
+            <div id="improvement-text-container"></div>
+            <div class="score" id="final-score">100 Điểm</div>
             <div class="cheer-text" id="cheer-text">Cố lên nhé!</div>
             
             <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
@@ -408,7 +473,7 @@
     </div>
 
     <div class="sticky-note">
-        ⚠️ CÓ THỂ SAI, NẾU PHÁT HIỆN SAI SÓT NHẮN TUI NHA! HÃY CHO TUI THÊM TỪ VỰNG NHÉ! 💬
+        ⚠️ CÓ THỂ SAI, NẾU PHÁT HIỆN SAI SÓT NHẮN TUI NHA! 💬
     </div>
 
     <div class="modal" id="addModal">
@@ -434,15 +499,15 @@
 
     <div class="modal" id="rankModal">
         <div class="modal-content">
-            <h2 style="color: #FF69B4; margin-top:0;">👑 Bảng Xếp Hạng Toàn Quốc</h2>
-            <p style="font-size:13px; color:#666;">Danh sách những chiến thần có điểm số cao nhất hệ thống!</p>
+            <h2 style="color: #FF69B4; margin-top:0;">📈 Bảng Vàng Tiến Bộ</h2>
+            <p style="font-size:13px; color:#666;">Bảng phong thần vinh danh mức độ bứt phá (Thụt lùi sẽ bị trừ điểm BXH!)</p>
             <div id="rank-loading" style="margin: 20px 0; font-weight:bold; color:#FF69B4;">Đang tải dữ liệu trực tuyến... 🔄</div>
             <table class="rank-table" id="rank-table-el" style="display:none;">
                 <thead>
                     <tr>
                         <th>Hạng</th>
-                        <th>Tên Người Học</th>
-                        <th>Điểm Kỷ Lục</th>
+                        <th>Chiến Thần</th>
+                        <th>Chỉ Số Tiến Bộ</th>
                     </tr>
                 </thead>
                 <tbody id="rank-tbody"></tbody>
@@ -452,7 +517,7 @@
     </div>
 
     <script>
-        // Danh sách từ vựng từ file của bạn
+        // Danh sách từ vựng gốc
         const defaultQuestions = [
             { correct: "Chí hướng", wrong: "Trí hướng", example: "Người có chí hướng lớn luôn kiên trì vượt khó." },
             { correct: "Chí lí", wrong: "Trí lí", example: "Lời khuyên của cậu nghe thật chí lí." },
@@ -481,7 +546,7 @@
             { correct: "Điểm xuyết", wrong: "Điểm xuyến", example: "Một vài đóa hoa điểm xuyết cho bức tranh." },
             { correct: "Độc giả", wrong: "Đọc giả", example: "Độc giả gửi nhiều phản hồi về cho tòa soạn." },
             { correct: "Dữ dội", wrong: "Giữ dội", example: "Cơn bão đổ bộ dữ dội vào đất liền." },
-            { correct: "Dư dả", wrong: "Dư giả", example: "Cuộc sống gia dịch dạo này đã dư dả hơn." },
+            { correct: "Dư dả", wrong: "Dư giả", example: "Cuộc sống gia đình dạo này đã dư dả hơn." },
             { correct: "Đường sá", wrong: "Đường xá", example: "Đường sá thành phố ngày càng hiện đại." },
             { correct: "Gia nhập", wrong: "Ra nhập", example: "Tôi vừa gia nhập câu lạc bộ ghi-ta." },
             { correct: "Dã tâm", wrong: "Giả tâm", example: "Kẻ địch lộ rõ dã tâm xâm lược." },
@@ -600,32 +665,41 @@
             { correct: "Viễn vọng", wrong: "Viển vọng", example: "Kính viễn vọng dùng để quan sát các vì sao." }
         ];
 
-        // API đám mây công cộng (miễn phí, siêu nhẹ) để đồng bộ bảng xếp hạng online
-        const LEADERBOARD_API_URL = 'https://api.keyvalue.xyz/2bc30deb/chinhta_leaderboard_global_v2';
+        // API Đám mây công cộng lưu trữ bảng xếp hạng bứt phá chính tả toàn quốc
+        const LEADERBOARD_API_URL = 'https://api.keyvalue.xyz/6ca94da1/chinhta_improvement_rank_v1';
 
         let database = [...defaultQuestions];
         let quizQuestions = [];
         let wrongQuestions = [];
         let currentQuestionIndex = 0;
-        let score = 0;
+        
+        let score = 100; // BAN ĐẦU MỖI HIỆP CÓ 100 ĐIỂM
+        const PTS_PER_CORRECT = 10; 
+        const PTS_PER_WRONG = 10;  
+
         let answered = false;
         let selectedCount = 20;
         let isPaused = false;
         let isWrongPracticeMode = false;
+        let currentPlayerName = "Người học ẩn danh 🐾";
 
         window.onload = function() {
+            // Lấy lại tên cũ đã từng nhập trước đó nếu có
+            let savedName = localStorage.getItem('lastPlayerName');
+            if(savedName) {
+                document.getElementById('player-name-field').value = savedName;
+            }
             updateStatsUI();
             initCloudLeaderboard();
         };
 
-        // Khởi tạo bộ nhớ trống trên cloud nếu đây là lần chạy đầu tiên
         async function initCloudLeaderboard() {
             try {
                 let res = await fetch(LEADERBOARD_API_URL);
                 if(res.status === 404) {
                     await fetch(LEADERBOARD_API_URL, { method: 'POST', body: JSON.stringify([]) });
                 }
-            } catch(e) { console.log("Lỗi khởi tạo cloud:", e); }
+            } catch(e) { console.log("Cloud init:", e); }
         }
 
         function updateStatsUI() {
@@ -646,9 +720,8 @@
             }
             document.getElementById('streak-val').innerText = currentStreak;
 
-            let highscore = localStorage.getItem('highScore') || "0";
-            let highTotal = localStorage.getItem('highTotal') || "0";
-            document.getElementById('highscore-val').innerText = `${highscore}/${highTotal}`;
+            let highscore = localStorage.getItem('highScore') || "100";
+            document.getElementById('highscore-val').innerText = highscore;
         }
 
         function triggerConfetti() {
@@ -701,7 +774,7 @@
         }
 
         function goHome() {
-            if (confirm("Bạn có chắc chắn muốn hủy lượt học này và về Trang chủ không nè?")) {
+            if (confirm("Bạn muốn hủy lượt học này và quay về màn hình chính không?")) {
                 goToSetup();
             }
         }
@@ -712,19 +785,35 @@
         }
 
         function startQuiz() {
+            // KIỂM TRA BẮT BUỘC NHẬP TÊN
+            const nameInput = document.getElementById('player-name-field').value.trim();
+            if (!nameInput) {
+                alert("Cậu ơi, nhập tên của mình vào trước khi học nhé! 🥰📝");
+                document.getElementById('player-name-field').focus();
+                return;
+            }
+            
+            // Lưu tên vào bộ nhớ tạm để dùng
+            currentPlayerName = nameInput;
+            localStorage.setItem('lastPlayerName', nameInput);
+
             isWrongPracticeMode = false;
             shuffleArray(database);
             let count = selectedCount === 'all' ? database.length : Math.min(selectedCount, database.length);
             quizQuestions = database.slice(0, count);
 
             currentQuestionIndex = 0;
-            score = 0;
+            score = 100; // Reset về 100 điểm ban đầu
             wrongQuestions = [];
             isPaused = false;
 
             document.getElementById('setup-screen').classList.remove('active-screen');
             document.getElementById('result-screen').classList.remove('active-screen');
             document.getElementById('quiz-screen').classList.add('active-screen');
+            
+            // Hiển thị tên lên màn hình làm bài
+            document.getElementById('live-name-val').innerText = currentPlayerName;
+
             loadQuestion();
         }
 
@@ -734,27 +823,29 @@
             quizQuestions = [...wrongQuestions];
 
             currentQuestionIndex = 0;
-            score = 0;
+            score = 100; 
             wrongQuestions = [];
             isPaused = false;
 
             document.getElementById('result-screen').classList.remove('active-screen');
             document.getElementById('quiz-screen').classList.add('active-screen');
+            document.getElementById('live-name-val').innerText = currentPlayerName;
             loadQuestion();
         }
 
         function loadQuestion() {
             answered = false;
             document.getElementById('explanation-box').style.display = 'none';
+            document.getElementById('live-score-val').innerText = score; 
             
             let q = quizQuestions[currentQuestionIndex];
             let progressPercent = (currentQuestionIndex / quizQuestions.length) * 100;
             document.getElementById('progress').style.width = `${progressPercent}%`;
             
             if(isWrongPracticeMode) {
-                document.getElementById('question').innerHTML = `🎯 <b>Ôn tập từ sai:</b> Từ nào viết ĐÚNG chính tả nè?`;
+                document.getElementById('question').innerHTML = `🎯 <b>Ôn tập từ sai:</b> Chọn từ viết ĐÚNG chính tả:`;
             } else {
-                document.getElementById('question').innerText = `Từ nào viết ĐÚNG chính tả vậy ta? 🤔`;
+                document.getElementById('question').innerText = `Từ nào dưới đây viết ĐÚNG chính tả? 🤔`;
             }
 
             let options = [
@@ -784,10 +875,11 @@
             if (isCorrect) {
                 selectedBtn.classList.add('correct');
                 playSound('correct');
-                score++;
+                score += PTS_PER_CORRECT; 
             } else {
                 selectedBtn.classList.add('incorrect');
                 playSound('wrong');
+                score -= PTS_PER_WRONG; 
                 wrongQuestions.push(q);
 
                 Array.from(document.getElementById('options').children).forEach(btn => {
@@ -797,6 +889,7 @@
                 });
             }
 
+            document.getElementById('live-score-val').innerText = score; 
             document.getElementById('explanation-text').innerHTML = `Từ đúng chuẩn chính là: <b>"${q.correct}"</b>.<br>💡 <i>Ngữ cảnh: ${q.example}</i>`;
             document.getElementById('explanation-box').style.display = 'block';
         }
@@ -811,7 +904,7 @@
             }
         }
 
-        // TẢI VÀ HIỂN THỊ BẢNG XẾP HẠNG TOÀN QUỐC TỪ CLOUD
+        // TẢI BẢNG XẾP HẠNG TRỰC TUYẾN TỪ CLOUD
         async function openRankModal() {
             document.getElementById('rankModal').style.display = 'flex';
             document.getElementById('rank-loading').style.display = 'block';
@@ -821,23 +914,24 @@
                 let res = await fetch(LEADERBOARD_API_URL);
                 let data = await res.json();
 
-                // Sắp xếp người học theo điểm kỷ lục cao nhất
-                data.sort((a, b) => b.score - a.score);
-                let topPlayers = data.slice(0, 15); // Lấy top 15 người đứng đầu
+                data.sort((a, b) => b.improvement - a.improvement);
+                let topPlayers = data.slice(0, 15);
 
                 let tbody = document.getElementById('rank-tbody');
                 tbody.innerHTML = '';
 
                 if(topPlayers.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#999;">Chưa có dữ liệu. Hãy đứng Top 1 đầu tiên nhé!</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#999;">Chưa có dữ liệu bứt phá.</td></tr>`;
                 } else {
                     topPlayers.forEach((player, index) => {
                         let medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}`;
+                        let scoreColor = player.improvement >= 0 ? '#2E7D32' : '#C62828';
+                        let prefix = player.improvement >= 0 ? '+' : '';
                         tbody.innerHTML += `
                             <tr>
                                 <td style="font-weight:bold;">${medal}</td>
                                 <td>${player.name}</td>
-                                <td style="font-weight:bold; color:#FF69B4;">${player.score} Từ</td>
+                                <td style="font-weight:bold; color:${scoreColor};">${prefix}${player.improvement} Điểm</td>
                             </tr>
                         `;
                     });
@@ -845,41 +939,37 @@
                 document.getElementById('rank-loading').style.display = 'none';
                 document.getElementById('rank-table-el').style.display = 'table';
             } catch(e) {
-                document.getElementById('rank-loading').innerText = 'Không thể tải bảng xếp hạng, vui lòng kiểm tra kết nối mạng! 😢';
+                document.getElementById('rank-loading').innerText = 'Không thể tải dữ liệu bảng xếp hạng! 😢';
             }
         }
 
         function closeRankModal() { document.getElementById('rankModal').style.display = 'none'; }
 
-        // ĐỒNG BỘ ĐIỂM LÊN ĐÁM MÂY CHUNG HỆ THỐNG
-        async function uploadScoreToGlobal(finalScore) {
-            let nickName = prompt("Nhập biệt danh đáng yêu của bạn để đồng bộ lên Bảng Xếp Hạng trực tuyến nha 🌸 (Để trống nếu muốn ẩn danh):");
-            if (nickName === null) return;
-            nickName = nickName.trim() || "Người học ẩn danh 🐾";
-
+        // TỰ ĐỘNG ĐỒNG BỘ ĐIỂM LÊN ĐÁM MÂY CHUNG
+        async function syncImprovementToGlobal(diffScore) {
             try {
                 let res = await fetch(LEADERBOARD_API_URL);
                 let data = await res.json();
 
-                // Kiểm tra trùng tên để cập nhật điểm cao hơn
-                let existingUser = data.find(p => p.name.toLowerCase() === nickName.toLowerCase());
+                let existingUser = data.find(p => p.name.toLowerCase() === currentPlayerName.toLowerCase());
                 if(existingUser) {
-                    if(finalScore > existingUser.score) {
-                        existingUser.score = finalScore;
+                    if (diffScore >= 0) {
+                        if(diffScore > existingUser.improvement) existingUser.improvement = diffScore;
+                    } else {
+                        existingUser.improvement += diffScore; // Trừ điểm trực tiếp nếu thụt lùi
                     }
                 } else {
-                    data.push({ name: nickName, score: finalScore });
+                    data.push({ name: currentPlayerName, improvement: diffScore });
                 }
 
-                // Lưu ngược lại dữ liệu lên cloud công khai
                 await fetch(LEADERBOARD_API_URL, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
-                alert("Đã cập nhật kỷ lục của bạn lên Bảng Xếp Hạng Toàn Quốc thành công! 🎉");
+                console.log("Cloud sync thành công!");
             } catch (e) {
-                console.log("Lỗi đồng bộ lên đám mây:", e);
+                console.log("Cloud update error:", e);
             }
         }
 
@@ -887,28 +977,47 @@
             document.getElementById('quiz-screen').classList.remove('active-screen');
             document.getElementById('result-screen').classList.add('active-screen');
             
-            document.getElementById('final-score').innerText = `${score}/${quizQuestions.length}`;
+            document.getElementById('result-title-name').innerText = `🎉 Kết Quả Của ${currentPlayerName} Nè! 🎉`;
+            document.getElementById('final-score').innerText = `${score} Điểm`;
             
-            let percent = (score / quizQuestions.length) * 100;
             let cheer = "";
-            if (percent === 100) {
-                cheer = "Tuyệt đỉnh xuất sắc! Cậu là chiến thần chính tả rồi! 👑🏆";
+            if (score >= 200) {
+                cheer = "Quá đỉnh cao! Đúng liên hoàn không trượt phát nào! 👑🏆";
                 triggerConfetti();
-            }
-            else if (percent >= 80) {
-                cheer = "Giỏi quá xá! Suýt chút nữa là hoàn hảo rồi nè! ⭐";
+            } else if (score >= 120) {
+                cheer = "Kết quả rất tốt! Cậu làm chuẩn chỉnh lắm nha! ⭐";
                 triggerConfetti();
+            } else if (score >= 100) {
+                cheer = "Giữ vững phong độ! Cố gắng bứt phá hơn ở hiệp sau nè! 🌸";
+            } else {
+                cheer = "Tiếc quá, điểm bị tụt xuống rồi! Cùng ôn tập lại để nhớ sâu hơn nhé! 💪🌸";
             }
-            else if (percent >= 50) cheer = "Khá ổn áp rồi, chăm chỉ luyện tập thêm xíu nha cục vàng! 🌸";
-            else cheer = "Đừng nản chí nhé, cùng học lại hiệp mới để nhớ sâu hơn nào! 💪🌸";
-            
             document.getElementById('cheer-text').innerText = cheer;
 
             if (!isWrongPracticeMode) { 
-                let oldHighScore = parseInt(localStorage.getItem('highScore') || '0');
+                let previousScore = localStorage.getItem('previousScore');
+                let diffScore = 0;
+                let badgeHtml = "";
+
+                if (previousScore !== null) {
+                    let prev = parseInt(previousScore);
+                    diffScore = score - prev;
+
+                    if (diffScore > 0) {
+                        badgeHtml = `<div class="improvement-badge">📈 Tiến bộ: +${diffScore} điểm so với hiệp trước!</div>`;
+                    } else if (diffScore < 0) {
+                        badgeHtml = `<div class="regression-badge">📉 Thụt lùi: ${diffScore} điểm so với hiệp trước!</div>`;
+                    } else {
+                        badgeHtml = `<div class="improvement-badge" style="color:#757575; background:#F5F5F5; border-color:#BDBDBD;">📊 Bằng điểm hiệp trước (Không tăng không giảm)</div>`;
+                    }
+                }
+                document.getElementById('improvement-text-container').innerHTML = badgeHtml;
+                
+                localStorage.setItem('previousScore', score);
+
+                let oldHighScore = parseInt(localStorage.getItem('highScore') || '100');
                 if (score > oldHighScore) {
                     localStorage.setItem('highScore', score);
-                    localStorage.setItem('highTotal', quizQuestions.length);
                 }
 
                 let lastLearnDate = localStorage.getItem('lastLearnDate');
@@ -922,11 +1031,8 @@
                         const diffTime = Math.abs(today - lastDate);
                         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-                        if (diffDays === 1) {
-                            currentStreak += 1;
-                        } else if (diffDays > 1) {
-                            currentStreak = 1;
-                        }
+                        if (diffDays === 1) currentStreak += 1;
+                        else if (diffDays > 1) currentStreak = 1;
                     } else {
                         currentStreak = 1;
                     }
@@ -934,10 +1040,10 @@
                     localStorage.setItem('lastLearnDate', todayStr);
                 }
 
-                // Gợi ý lưu điểm sau khi hoàn thành lượt học
-                setTimeout(() => {
-                    uploadScoreToGlobal(score);
-                }, 800);
+                // Tự động gửi kết quả tiến bộ/thụt lùi lên đám mây với tên đã nhập từ đầu
+                if (diffScore !== 0 && previousScore !== null) {
+                    syncImprovementToGlobal(diffScore);
+                }
             }
 
             const retryWrongBtn = document.getElementById('btn-retry-wrong');
