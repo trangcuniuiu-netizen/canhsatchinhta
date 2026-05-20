@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> CÙNG HỌC TIẾNG VIỆT V-ACT 🌸</title>
+    <title>QUYẾT TÂM 300 TIẾNG VIỆT V-ACT 🌸</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         /* --- PHONG CÁCH PASTEL KAWAII CHUYÊN NGHIỆP --- */
@@ -387,7 +387,7 @@
         }
 
         .explanation-text-style li {
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .next-btn, .action-btn {
@@ -412,7 +412,7 @@
             background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%) !important;
         }
 
-        /* --- MODAL & ĐIỀU CHỈNH MÀN HÌNH --- */
+        /* --- MODAL --- */
         .modal {
             display: none;
             position: fixed;
@@ -484,7 +484,7 @@
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="study-module" value="2" onchange="switchModule(2)"> 
-                            <span>💡 Học phần 2: Những cặp từ hay bị dùng nhầm lẫn (đều đúng chính tả)</span>
+                            <span>💡 Học phần 2: Những cặp từ dễ nhầm lẫn (Đều đúng chính tả)</span>
                         </label>
                     </div>
                 </div>
@@ -495,14 +495,14 @@
                     <div id="group-count-1" class="select-group">
                         <button class="select-btn active" onclick="setCount(20, this)">20 Từ</button>
                         <button class="select-btn" onclick="setCount(50, this)">50 Từ</button>
-                        <button class="select-btn" onclick="setCount(100, this).">100 Từ</button>
+                        <button class="select-btn" onclick="setCount(100, this)">100 Từ</button>
                         <button class="select-btn" onclick="setCount('all', this)">Tất cả</button>
                     </div>
 
                     <div id="group-count-2" class="select-group" style="display: none;">
-                        <button class="select-btn active" onclick="setCount(2, this)">2 Cặp</button>
-                        <button class="select-btn" onclick="setCount(5, this)">5 Cặp</button>
+                        <button class="select-btn active" onclick="setCount(5, this)">5 Cặp</button>
                         <button class="select-btn" onclick="setCount(10, this)">10 Cặp</button>
+                        <button class="select-btn" onclick="setCount(13, this)">13 Cặp</button>
                         <button class="select-btn" onclick="setCount('all2', this)">Tất cả</button>
                     </div>
                 </div>
@@ -635,7 +635,7 @@
             { correct: "Nước xốt", wrong: "Nước sốt", example: "Món mì Ý có nước xốt cà chua rất ngon." },
             { correct: "Phố xá", wrong: "Phố sá", example: "Phố xá đông đúc đèn hoa rực rỡ." },
             { correct: "Rải rác", wrong: "Dải rác", example: "Lá vàng rơi rải rác trên sân trường." },
-            { correct: "Ráo riết", wrong: "Đáo riết", example: "Công an đang ráo riết truy tìm thủ phạm." },
+            { correct: "Ráo riết", wrong: "Đáo riết", example: "Công anh đang ráo riết truy tìm thủ phạm." },
             { correct: "Rời mắt", wrong: "Dời mắt", example: "Vẻ đẹp khiến tôi không thể rời mắt." },
             { correct: "Ròng rã", wrong: "Dòng rã", example: "Anh ấy đã nghiên cứu suốt ba tháng ròng rã." },
             { correct: "Dõng dạc", wrong: "Giõng giạc", example: "Bạn lớp trưởng dõng dạc đọc bài thơ." },
@@ -680,7 +680,7 @@
             { correct: "Xoay sở", wrong: "Xoay xở", example: "Mẹ cố gắng xoay sở lo tiền học phí cho con." },
             { correct: "Xử lí", wrong: "Sử lí", example: "Hệ thống đang xử lí dữ liệu đầu vào." },
             { correct: "Xứ sở", wrong: "Sứ sở", example: "Đà Lạt được mệnh danh là xứ sở sương mù." },
-            { correct: "Xử sự", wrong: "Xử xự / Sử sự", example: "Cách xử sự khéo léo giúp giữ gìn các mối quan hệ." },
+            { correct: "Xử sự", wrong: "Xử xự", example: "Cách xử sự khéo léo giúp giữ gìn các mối quan hệ." },
             { correct: "Xù xì", wrong: "Sù sì", example: "Thân cây già cỗi, lớp vỏ xù xì đại ngàn." },
             { correct: "Suất cơm", wrong: "Xuất cơm", example: "Mỗi bạn học sinh nhận một suất cơm trưa." },
             { correct: "Xuất sắc", wrong: "Xuất xắc", example: "Thành tích học tập đạt loại xuất sắc." },
@@ -707,7 +707,7 @@
             { correct: "Xe điếu", wrong: "Se điếu", example: "Tiếng điếu cày kêu giòn tan như xe điếu." },
             { correct: "Sưng sỉa", wrong: "Xung xia", example: "Khuôn mặt sưng sỉa hờn dỗi không nói một lời." },
             { correct: "Sung công", wrong: "Xung công", example: "Tịch thu tài sản bất chính đem sung công quỹ." },
-            { correct: "Bánh giày / bánh giầy", wrong: "Bánh dày", example: "Bánh chưng bánh giầy là lễ vật dâng vua Hùng." },
+            { correct: "Bánh giầy", wrong: "Bánh dầy", example: "Bánh chưng bánh giầy là lễ vật dâng vua Hùng." },
             { correct: "Bơi trải", wrong: "Bơi chải", example: "Hội bơi trải truyền thống trên sông tấp nập người xem." },
             { correct: "Trầy trật", wrong: "Chầy chật", example: "Trầy trật mãi mới hoàn thành xong bài tập khó." },
             { correct: "Vãng lai", wrong: "Vàng lai", example: "Khách vãng lai ghé thăm đền thờ cổ kính." },
@@ -715,23 +715,26 @@
             { correct: "Viễn vọng", wrong: "Viển vọng", example: "Kính viễn vọng dùng để quan sát các vì sao." }
         ];
 
-               // --- DỮ LIỆU HỌC PHẦN 2: CHỈ LẤY CÁC CẶP TỪ TRONG ẢNH TÀI LIỆU CỦA CẬU ---
+        // --- DỮ LIỆU HỌC PHẦN 2: CÁC CẶP TỪ DỄ DÙNG NHẦM LẪN CẬU CUNG CẤP ---
         const module2Questions = [
-            { isModule2: true, context: "Điền từ vào chỗ trống: 'Ông bà thường ___ con cháu phải ăn ở hiền lành, hiếu thảo.'", optionA: "Căn dặn", optionB: "Căn vặn", correct: "Căn dặn", explanation: "<ul><li><b>Căn dặn</b>: Dặn dò một cách tỉ mỉ, cẩn thận (thường là người bề trên dặn dò người dưới).</li><li><b>Căn vặn</b>: Hỏi cặn kẽ đến cùng cốt để cho lộ rõ sự việc, hỏi cho ra lẽ bằng được.</li></ul>" },
-            { isModule2: true, context: "Khi một người đứng ngoài cuộc mà nhìn, không hề có ý định tham gia vào, ta nói họ có thái độ:", optionA: "Bàng quan", optionB: "Bàng quang", correct: "Bàng quan", explanation: "<ul><li><b>Bàng quan</b>: Đứng ngoài mà xem, thờ ơ, không dự hay can thiệp vào sự việc.</li><li><b>Bàng quang</b>: Là một bộ phận sinh học trong cơ thể (bóng đái, nơi chứa nước tiểu).</li></ul>" },
-            { isModule2: true, context: "Điền từ vào chỗ trống: 'Vụ án lừa đảo này có rất nhiều điểm ___ chưa thể giải thích.'", optionA: "Khúc mắc", optionB: "Khúc mắt", correct: "Khúc mắc", explanation: "<ul><li><b>Khúc mắc</b>: Có những điều vướng mắc, rắc rối, khó lòng giải quyết hoặc khó nói ra.</li><li><b>Khúc mắt</b>: Cách viết sai chính tả hoàn toàn, không tồn tại từ này trong từ điển.</li></ul>" },
-            { isModule2: true, context: "Chọn từ đúng: 'Những câu chuyện bà kể đêm khuya mang một sức hấp dẫn, đầy ___'", optionA: "Phép màu", optionB: "Phép mầu", correct: "Phép màu", explanation: "<ul><li><b>Phép màu</b>: Tài tình, huyền diệu, mang tính chất cao siêu không thể giải thích (đây là từ chuẩn thường dùng).</li><li><b>Phép mầu</b>: Cách viết sai chính tả do biến âm địa phương.</li></ul>" },
-            { isModule2: true, context: "Điền từ vào chỗ trống: 'Căn phòng được thắp đèn điện sáng ___'", optionA: "Sáng trưng", optionB: "Sáng chưng", correct: "Sáng trưng", explanation: "<ul><li><b>Sáng trưng</b>: Tính từ chỉ mức độ sáng rõ mồn một, thấy rõ hết thảy mọi vật xung quanh.</li><li><b>Sáng chưng</b>: Cách dùng sai chính tả, không đúng chuẩn của từ điển phổ thông.</li></ul>" },
-            { isModule2: true, context: "Khi một chú chim thoát khỏi chiếc lồng giam cầm để tìm lại tự do, ta dùng từ nào?", optionA: "Sổ lồng", optionB: "Xổ lồng", correct: "Sổ lồng", explanation: "<ul><li><b>Sổ lồng</b>: Việc giải phóng, thoát ra khỏi cảnh tù túng, giam hãm để lấy lại tự do.</li><li><b>Xổ lồng</b>: Cách viết sai chính tả thường gặp do lẫn lộn giữa âm 'S' và 'X'.</li></ul>" },
-            { isModule2: true, context: "Điền từ: 'Do hoàn cảnh ngặt nghèo, anh ấy phải ___ nơi đất khách quê người.'", optionA: "Phiêu bạt", optionB: "Phiêu bạc", correct: "Phiêu bạt", explanation: "<ul><li><b>Phiêu bạt</b>: Bị hoàn cảnh ép buộc rời bỏ quê hương, phải sống nay đây mai đó ở những nơi xa lạ.</li><li><b>Phiêu bạc</b>: Viết sai chính tả của từ phiêu bạt.</li></ul>" },
-            { isModule2: true, context: "Khi ta vô tình thoáng nghe được một tin tức gì đó chưa chắc chắn, ta gọi là nghe:", optionA: "Phong thanh", optionB: "Phong phanh", correct: "Phong thanh", explanation: "<ul><li><b>Phong thanh</b>: Tin tức thoáng nghe được, mang máng biết được chứ chưa thật sự rõ ràng hay chắc chắn.</li><li><b>Phong phanh</b>: Thường chỉ cách ăn mặc quá mỏng manh, không đủ ấm giữa trời lạnh.</li></ul>" },
-            { isModule2: true, context: "Chọn từ điền vào câu: 'Cây ổi sau nhà năm nay cho quả sai ___'", optionA: "Sum suê", optionB: "Xum xuê", correct: "Sum suê", explanation: "<ul><li><b>Sum suê</b> (hoặc Sum sê): Chỉ cây cối có rất nhiều cành lá rậm rạp, tươi tốt, trĩu quả.</li><li><b>Xum xuê</b>: Từ viết sai chính tả do thói quen phát âm sai giữa 'S' và 'X'.</li></ul>" },
-            { isModule2: true, context: "Khi một người chính thức nhận một chức vụ mới được giao, ta gọi là buổi lễ:", optionA: "Nhậm chức", optionB: "Nhận chức", correct: "Nhậm chức", explanation: "<ul><li><b>Nhậm chức</b>: (Từ trang trọng) Chính thức gánh vác, đảm đương một chức vụ chính trị hoặc quản lý.</li><li><b>Nhận chức</b>: Cách nói thông thường, thô sơ hoặc viết sai so với từ Hán Việt chuẩn là 'nhậm'.</li></ul>" },
-            { isModule2: true, context: "Điền từ đúng vào câu: 'Bài thơ tuy ngắn nhưng nội dung lại rất ___'", optionA: "Súc tích", optionB: "Xúc tích", correct: "Súc tích", explanation: "<ul><li><b>Súc tích</b>: Chứa đựng rất nhiều ý tứ sâu xa, cô đọng trong một hình thức diễn đạt ngắn gọn.</li><li><b>Xúc tích</b>: Cách viết sai chính tả rất phổ biến vì nhầm lẫn âm 'S' và 'X'.</li></ul>" },
-            { isModule2: true, context: "Điền từ đúng vào câu: 'Mọi công việc của dự án hôm nay diễn ra vô cùng ___'", optionA: "Suôn sẻ", optionB: "Suông sẻ", correct: "Suôn sẻ", explanation: "<ul><li><b>Suôn sẻ</b>: Trôi chảy, thuận lợi liền mạch, hoàn toàn không gặp bất kỳ khó khăn hay vấp váp nào.</li><li><b>Suông sẻ</b>: Cách viết sai chính tả hoàn toàn.</li></ul>" },
-            { isModule2: true, context: "Từ nào chỉ việc khởi thảo văn bản dựa trên ý kiến thống nhất của một tập thể?", optionA: "Chấp bút", optionB: "Chắp bút", correct: "Chấp bút", explanation: "<ul><li><b>Chấp bút</b>: 'Chấp' là cầm, nắm, giữ => Cầm bút để viết, khởi thảo văn bản theo ý kiến tập thể.</li><li><b>Chắp bút</b>: 'Chắp' là ghép lại, nối liền => Đây là từ không có nghĩa trong tiếng Việt.</li></ul>" },
-            { isModule2: true, context: "Điền từ: 'Hai trường học nhỏ vừa được quyết định ___ thành một trường lớn.'", optionA: "Sáp nhập", optionB: "Sát nhập", correct: "Sáp nhập", explanation: "<ul><li><b>Sáp nhập</b>: Nhập vào với nhau để làm một (thường nói về tổ chức, cơ quan, đơn vị hành chính).</li><li><b>Sát nhập</b>: Từ không có trong từ điển, bị viết sai do nhầm từ 'sát' (ngay bên cạnh).</li></ul>" },
-            { isModule2: true, context: "Chọn từ điền vào câu: 'Chuyến đi ___ Đền Hùng giúp chúng em hiểu thêm về lịch sử.'", optionA: "Tham quan", optionB: "Thăm quan", correct: "Tham quan", explanation: "<ul><li><b>Tham quan</b>: Đi xem tận nơi, tận mắt nhằm mục đích mở rộng hiểu biết hoặc học tập kinh nghiệm.</li><li><b>Thăm quan</b>: Cách dùng sai từ ghép Hán Việt (không dùng từ thuần Việt 'thăm' ghép với 'quan').</li></ul>" }
+            { isModule2: true, context: "Điền từ vào chỗ trống: 'Bố mẹ luôn chuẩn bị kỹ càng và ___ con cái trước khi đi học xa nhà.'", optionA: "Căn dặn", optionB: "Căn vặn", correct: "Căn dặn", explanation: "<ul><li><b>Căn dặn</b>: Dặn dò một cách tỉ mỉ, cẩn thận (thường là người bề trên nói với người dưới).</li><li><b>Căn vặn</b>: Hỏi cặn kẽ đến cùng cốt cho lộ ra sự việc, hỏi cho bằng ra lẽ.</li></ul>" },
+            { isModule2: true, context: "Điền từ vào chỗ trống: 'Cảnh sát liên tục ___ nghi phạm để tìm ra những điểm mâu thuẫn trong lời khai.'", optionA: "Căn dặn", optionB: "Căn vặn", correct: "Căn vặn", explanation: "<ul><li><b>Căn dặn</b>: Dặn dò một cách tỉ mỉ, cẩn thận.</li><li><b>Căn vặn</b>: Hỏi cặn kẽ đến cùng cốt cho lộ ra sự việc, hỏi cho bằng ra lẽ.</li></ul>" },
+            { isModule2: true, context: "Khi một người đứng bên ngoài sự việc, thờ ơ và tự coi như không dính líu gì đến mình, ta gọi họ là người:", optionA: "Bàng quan", optionB: "Bàng quang", correct: "Bàng quan", explanation: "<ul><li><b>Bàng quan</b>: Tự coi mình là người ngoài cuộc, nhìn sự việc một cách thờ ơ, không dính líu đến mình.</li><li><b>Bàng quang</b>: Thuật ngữ sinh học, chỉ bọng đái, túi chứa nước tiểu trong cơ thể.</li></ul>" },
+            { isModule2: true, context: "Nhiễm trùng đường tiết niệu có thể gây đau tức vùng hạ vị và viêm loét ở cơ quan nào?", optionA: "Bàng quan", optionB: "Bàng quang", correct: "Bàng quang", explanation: "<ul><li><b>Bàng quan</b>: Tự coi mình là người ngoài cuộc, coi như không dính líu đến mình.</li><li><b>Bàng quang</b>: Bọng đái, túi dùng để chứa nước tiểu.</li></ul>" },
+            { isModule2: true, context: "Khi nhận được một tin dữ bất ngờ khiến một người ngẩn người ra, choáng váng không còn ý thức được gì, ta dùng từ:", optionA: "Bàng hoàng", optionB: "Bàn hoàn", correct: "Bàng hoàng", explanation: "<ul><li><b>Bàng hoàng</b>: Ngẩn người ra, choáng váng đến mức như không còn ý thức được gì nữa.</li><li><b>Bàn hoàn</b>: Quấn quýt không rời hoặc suy nghĩ quanh quẩn không dứt.</li></ul>" },
+            { isModule2: true, context: "Điền từ vào chỗ trống: 'Đêm đã khuya nhưng tâm trí cô ấy vẫn cứ ___ nghĩ ngợi về chuyện cũ không dứt.'", optionA: "Bàng hoàng", optionB: "Bàn hoàn", correct: "Bàn hoàn", explanation: "<ul><li><b>Bàng hoàng</b>: Ngẩn người ra, choáng váng, sốc sững sờ.</li><li><b>Bàn hoàn</b>: Quấn quýt không rời hoặc suy nghĩ quanh quẩn không dứt.</li></ul>" },
+            { isModule2: true, context: "Chọn từ đúng để điền vào câu: 'Khí thế anh hùng hào hùng ___ khắp non sông gấm vóc.'", optionA: "Bàng bạc", optionB: "Bàn bạc", correct: "Bàng bạc", explanation: "<ul><li><b>Bàng bạc</b>: Có màu hơi bạc hoặc mang nghĩa ẩn dụ là tràn ngập, mênh mông, đâu đâu cũng thấy có.</li><li><b>Bàn bạc</b>: Trao đổi ý kiến với nhau để cùng tìm ra hướng giải quyết (nói khái quát).</li></ul>" },
+            { isModule2: true, context: "Điền từ thích hợp: 'Trước khi đưa ra quyết định cuối cùng, cả nhóm cần ngồi lại để ___ kỹ lưỡng.'", optionA: "Bàng bạc", optionB: "Bàn bạc", correct: "Bàn bạc", explanation: "<ul><li><b>Bàng bạc</b>: Có màu hơi bạc hoặc tràn ngập, mênh mông khắp nơi.</li><li><b>Bàn bạc</b>: Bàn luận, trao đổi ý kiến qua lại giữa các thành viên.</li></ul>" },
+            { isModule2: true, context: "Nhóm thanh niên nghịch ngợm tìm cách cố ý ___ không cho xe cộ lưu thông qua con phố.", optionA: "Chặn đường", optionB: "Chặng đường", correct: "Chặn đường", explanation: "<ul><li><b>Chặn đường</b>: Động từ chỉ hành động cản trở, chặn lại không cho người hoặc phương tiện lưu thông.</li><li><b>Chặng đường</b>: Danh từ chỉ một khoảng cách, một đoạn đường hoặc một khoảng thời gian tương đối dài.</li></ul>" },
+            { isModule2: true, context: "Điền từ đúng: 'Kỳ thi tốt nghiệp sắp tới là một ___ vô cùng quan trọng đối với mỗi học sinh.'", optionA: "Chặn đường", optionB: "Chặng đường", correct: "Chặng đường", explanation: "<ul><li><b>Chặn đường</b>: Cản trở, ngăn chặn giao thông trên đường.</li><li><b>Chặng đường</b>: Một khoảng cách, một đoạn đường hoặc một giai đoạn thời gian tương đối dài.</li></ul>" },
+            { isModule2: true, context: "Trong nghiên cứu khoa học, một luận điểm mới đưa ra để giải thích hiện tượng và tạm chấp nhận khi chưa được kiểm chứng gọi là:", optionA: "Giả thuyết", optionB: "Giả thiết", correct: "Giả thuyết", explanation: "<ul><li><b>Giả thuyết</b>: Luận điểm mới trong khoa học (để giải thích một hiện tượng tự nhiên nào đó và tạm được chấp nhận, chưa qua kiểm nghiệm, kiểm chứng).</li><li><b>Giả thiết</b>: Quy ước cho trước trong một định lý hay một bài toán để căn cứ vào đó mà suy ra kết luận.</li></ul>" },
+            { isModule2: true, context: "Trong cấu trúc của một định lý toán học, phần dữ kiện cho trước để căn cứ suy ra kết luận được gọi là:", optionA: "Giả thuyết", optionB: "Giả thiết", correct: "Giả thiết", explanation: "<ul><li><b>Giả thuyết</b>: Luận điểm mới trong khoa học dùng để giải thích hiện tượng khi chưa được kiểm nghiệm thực tế.</li><li><b>Giả thiết</b>: Quy ước cho trước trong bài toán, định lý để làm căn cứ giải hoặc chứng minh.</li></ul>" },
+            { isModule2: true, context: "Một người có tài hùng biện, ăn nói vô cùng lưu loát, trôi chảy và không hề vấp váp, ta nói họ:", optionA: "Nói suôn", optionB: "Nói suông", correct: "Nói suôn", explanation: "<ul><li><b>Nói suôn</b>: Cách nói trôi chảy, mạch lạc, mượt mà và không bị vấp váp.</li><li><b>Nói suông</b>: Chỉ nói bằng lời hứa suông mà hoàn toàn không bắt tay vào làm việc thực tế.</li></ul>" },
+            { isModule2: true, context: "Mọi người thường không thích những kẻ chỉ biết hứa hẹn, ___ mà không chịu thực hiện hành động.", optionA: "Nói suôn", optionB: "Nói suông", correct: "Nói suông", explanation: "<ul><li><b>Nói suôn</b>: Nói năng trôi chảy, lưu loát, không vấp.</li><li><b>Nói suông</b>: Chỉ nói bằng miệng, hứa hão huyền chứ không làm.</li></ul>" },
+            { isModule2: true, context: "Điền từ đúng vào chỗ trống: 'Tôi mới chỉ nghe ___ dư luận về việc công ty sắp thay đổi nhân sự.'", optionA: "Phong thanh", optionB: "Phong phanh", correct: "Phong thanh", explanation: "<ul><li><b>Phong thanh</b>: Nghĩa gốc là tiếng gió; thường dùng với cụm từ 'nghe phong thanh' nghĩa là nghe loáng thoáng, nghe lời đồn đại chưa rõ ràng.</li><li><b>Phong phanh</b>: Nghĩa gốc là mỏng manh, đơn sơ; thường dùng với cụm từ 'ăn mặc phong phanh' chỉ việc mặc không đủ ấm.</li></ul>" },
+            { isModule2: true, context: "Giữa trời đông giá rét, việc ăn mặc ___ sẽ khiến cậu rất dễ bị nhiễm lạnh và đổ bệnh.", optionA: "Phong thanh", optionB: "Phong phanh", correct: "Phong phanh", explanation: "<ul><li><b>Phong thanh</b>: Nghe loáng thoáng, nghe phong phanh lời đồn.</li><li><b>Phong phanh</b>: Mỏng manh, đơn sơ (chỉ cách ăn mặc không đủ ấm giữa thời tiết lạnh).</li></ul>" },
+            { isModule2: true, context: "Từ nào dưới đây mang ý nghĩa chính xác là 'đi đến tận nơi để ngắm nhìn phong cảnh, thưởng ngoạn thiên nhiên'?", optionA: "Vãng cảnh", optionB: "Vãn cảnh", correct: "Vãng cảnh", explanation: "<ul><li><b>Vãng cảnh</b>: Đi xem phong cảnh, đi ngắm cảnh đẹp (ví dụ: Cuối tuần, gia đình tôi đi vãng cảnh chùa).</li><li><b>Vãn cảnh</b>: 'Vãn' nghĩa là chiều, muộn; từ này dùng để chỉ cảnh mang nghĩa ẩn dụ về tình cảnh cô đơn, xế bóng khi về già (rất ít dùng).</li></ul>" },
+            { isModule2: true, context: "Điền từ thích hợp vào chỗ trống: 'Cuối tuần, cả gia đình tôi cùng rủ nhau đi ___ chùa Hương để tìm sự thanh tịnh.'", optionA: "Vãng cảnh", optionB: "Vãn cảnh", correct: "Vãng cảnh", explanation: "<ul><li><b>Vãng cảnh</b>: Đi đến ngắm nhìn phong cảnh, thưởng ngoạn cảnh đẹp danh lam thắng cảnh.</li><li><b>Vãn cảnh</b>: Từ chỉ tình cảnh, cảnh ngộ lúc xế chiều, về già (ẩn dụ, ít gặp).</li></ul>" }
         ];
 
         // --- DANH SÁCH CÂU NÓI TRUYỀN ĐỘNG LỰC ---
@@ -779,7 +782,7 @@
             changeMotivationQuote();
         };
 
-        // --- HÀM ĐỒNG HỒ ĐẾM NGƯỢC THI VACT ---
+        // --- ĐỒNG HỒ ĐẾM NGƯỢC THI VACT ---
         function initCountdown() {
             const targetDate = new Date("May 24, 2026 00:00:00").getTime();
 
@@ -807,13 +810,11 @@
             setInterval(updateTimer, 1000);
         }
 
-        // Đổi câu truyền động lực ngẫu nhiên từ danh sách
         function changeMotivationQuote() {
             const randomIndex = Math.floor(Math.random() * motivationQuotes.length);
             document.getElementById("motivation-quote").innerText = `${motivationQuotes[randomIndex]}`;
         }
 
-        // Chuyển đổi qua lại giữa Học phần 1 và Học phần 2
         function switchModule(moduleNum) {
             currentModule = moduleNum;
             const group1 = document.getElementById('group-count-1');
@@ -828,7 +829,7 @@
             } else {
                 group1.style.display = 'none';
                 group2.style.display = 'grid';
-                selectedCount = 2;
+                selectedCount = 5;
                 document.querySelectorAll('#group-count-2 .select-btn').forEach(b => b.classList.remove('active'));
                 document.querySelector('#group-count-2 .select-btn').classList.add('active');
             }
@@ -978,7 +979,7 @@
 
             if (q.isModule2) {
                 document.getElementById('title-quiz').innerText = "Phân Biệt Cặp Từ Dùng Nhầm Lẫn 💡";
-                document.getElementById('explanation-title').innerHTML = "💡 Phân biệt chi tiết ý nghĩa từ chuẩn:";
+                document.getElementById('explanation-title').innerHTML = "💡 Phân biệt chi tiết ý nghĩa từ đúng:";
                 if (isWrongPracticeMode) {
                     qBox.innerHTML = `🎯 <b>Ôn tập câu sai:</b> ${q.context}`;
                 } else {
