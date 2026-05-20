@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vui Học Chính Tả Cùng Bé 🌸</title>
+    <style>
+        /* --- PHONG CÁCH PASTEL KAWAII --- */
+        :root {
+            --bg-color: #FFF0F5; /* Lavender Blush */
+            --primary-color: #FFB6C1; /* Light Pink */
+            --secondary-color: #E0F7FA; /* Light Cyan */
+            --text-color: #4A4A4A;
+            --correct-color: #A5D6A7; /* Pastel Green */
+            --incorrect-color: #EF9A9A; /* Pastel Red */
+            --accent-color: #FFF59D; /* Pastel Yellow */
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 8px 24px rgba(255, 182, 193, 0.4);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            border: 4px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #FF69B4;
+            font-size: 26px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* --- LƯU Ý LUÔN HIỆN --- */
+        .sticky-note {
+            background-color: #FFF3E0;
+            border: 1px dashed #FFB74D;
+            color: #E65100;
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: bold;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* --- THANH ĐIỀU KHIỂN (TRANG CHỦ / TẠM DỪNG) --- */
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .control-btn {
+            background-color: #FFF;
+            border: 2px solid var(--primary-color);
+            color: #FF69B4;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* --- MÀN HÌNH SETUP --- */
+        .setup-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .select-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            width: 100%;
+            max-width: 320px;
+            margin: 15px 0;
+        }
+
+        .select-btn {
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            padding: 12px 15px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #FF69B4;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .select-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.03);
+            box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4);
+        }
+
+        /* --- PROGRESS BAR --- */
+        .progress-bar {
+            background-color: #F0F0F0;
+            border-radius: 12px;
+            height: 12px;
+            width: 100%;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            background-color: var(--primary-color);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-box {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-radius: 16px;
+            border: 2px dashed #4DD0E1;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background-color: white;
+            border: 2px solid #E0E0E0;
+            border-radius: 16px;
+            padding: 15px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .option-btn:hover {
+            background-color: #FFF9C4;
+            border-color: #FFF59D;
+            transform: translateY(-2px);
+        }
+
+        .option-btn.correct {
+            background-color: var(--correct-color) !important;
+            border-color: #81C784 !important;
+            color: #1B5E20;
+        }
+
+        .option-btn.incorrect {
+            background-color: var(--incorrect-color) !important;
+            border-color: #E57373 !important;
+            color: #B71C1C;
+        }
+
+        /* --- GIẢI THÍCH --- */
+        .explanation-box {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 16px;
+            background-color: #FFFDE7;
+            border: 2px solid var(--accent-color);
+            display: none;
+            animation: fadeIn 0.5s ease;
+            text-align: left;
+        }
+
+        .next-btn, .action-btn {
+            margin-top: 20px;
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+            transition: all 0.2s;
+        }
+
+        .next-btn:hover, .action-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 105, 180, 0.5);
+        }
+
+        .add-q-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 26px;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+            z-index: 5;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            border: 3px solid var(--primary-color);
+            text-align: center;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #DDD;
+        }
+
+        .screen { display: none; }
+        .active-screen { display: block; }
+        
+        .score { font-size: 48px; font-weight: bold; color: #FF69B4; margin: 20px 0; }
+        .cheer-text { font-size: 22px; font-weight: bold; color: #4CAF50; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button class="add-q-btn" onclick="openModal()" title="Thêm từ mới vào kho nè!">➕</button>
+        
+        <!-- MÀN HÌNH SETUP -->
+        <div id="setup-screen" class="screen active-screen setup-screen">
+            <h1>Hôm nay học mấy từ nè? 🌸</h1>
+            <p style="font-size: 15px; color: #777; margin: 0 10px;">Chọn số lượng câu hỏi để cùng bứt phá chính tả nhé cục vàng!</p>
+            <div class="select-group">
+                <button class="select-btn active" onclick="setCount(20, this)">20 Từ</button>
+                <button class="select-btn" onclick="setCount(50, this)">50 Từ</button>
+                <button class="select-btn" onclick="setCount(100, this)">100 Từ</button>
+                <button class="select-btn" onclick="setCount('all', this)">Tất cả từ</button>
+            </div>
+            <button class="action-btn" onclick="startQuiz()">Vào Học Ngay Kẻo Muộn! 🚀</button>
+        </div>
+
+        <!-- MÀN HÌNH CÂU HỎI -->
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-controls">
+                <button class="control-btn" onclick="goHome()">🏠 Trang chủ</button>
+                <button class="control-btn" id="pause-btn" onclick="togglePause()">⏸️ Tạm dừng</button>
+            </div>
+            <h1 id="title-quiz">Thử Thách Chính Tả 📝✨</h1>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <div class="question-box" id="question">Đang tải câu hỏi...</div>
+            <div class="options-container" id="options"></div>
+            
+            <div class="explanation-box" id="explanation-box">
+                <strong style="color: #E65100;">💡 Giải thích từ đúng:</strong>
+                <p id="explanation-text"></p>
+                <br>
+                <button class="next-btn" id="next-btn" onclick="nextQuestion()">Câu tiếp theo 🐾</button>
+            </div>
+        </div>
+
+        <!-- MÀN HÌNH KẾT QUẢ -->
+        <div id="result-screen" class="screen">
+            <h1>🎉 Kết Quả Của Cậu Nè! 🎉</h1>
+            <div class="score" id="final-score">0/0</div>
+            <div class="cheer-text" id="cheer-text">Cố lên nhé!</div>
+            <button class="action-btn" onclick="goToSetup()">Học tiếp hiệp mới 🔄</button>
+        </div>
+    </div>
+
+    <!-- DÒNG LƯU Ý LUÔN LUÔN HIỆN TRÊN MÀN HÌNH -->
+    <div class="sticky-note">
+        ⚠️ CÓ THỂ SAI, NẾU PHÁT HIỆN SAI SÓT NHẮN TUI NHA! 💬
+    </div>
+
+    <!-- MODAL THÊM CÂU HỎI -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <h3>Thêm Câu Hỏi Mới Giúp Bạn 🌸</h3>
+            <input type="text" id="newWordCorrect" placeholder="Từ viết ĐÚNG (VD: xán lạn)">
+            <input type="text" id="newWordWrong" placeholder="Từ viết SAI (VD: sáng lạng)">
+            <input type="text" id="newExample" placeholder="Ví dụ câu đúng (VD: Tương lai xán lạn.)">
+            <div style="display:flex; gap:10px; margin-top:15px;">
+                <button class="action-btn" style="background:#9E9E9E; flex:1;" onclick="closeModal()">Hủy</button>
+                <button class="action-btn" style="flex:1;" onclick="addNewQuestion()">Lưu lại ✨</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TẠM DỪNG -->
+    <div class="modal" id="pauseModal" style="z-index: 11;">
+        <div class="modal-content">
+            <h2 style="color: #FF69B4; margin-top:0;">⏸️ Đang Tạm Dừng</h2>
+            <p>Trò chơi đang dừng lại một chút. Khi nào sẵn sàng thì chúng mình học tiếp nhé!</p>
+            <button class="action-btn" style="width:100%;" onclick="togglePause()">Tiếp tục học ngay 🐾</button>
+        </div>
+    </div>
+
+    <script>
+        const defaultQuestions = [
+            { correct: "Chí hướng", wrong: "Trí hướng", example: "Người có chí hướng lớn luôn kiên trì vượt khó." },
+            { correct: "Chí lí", wrong: "Trí lí", example: "Lời khuyên của cậu nghe thật chí lí." },
+            { correct: "Chín muồi", wrong: "Chín mùi", example: "Điều kiện đã chín muồi để thực hiện kế hoạch." },
+            { correct: "Chín chắn", wrong: "Chỉnh chắc", example: "Suy nghĩ của cô ấy rất chín chắn." },
+            { correct: "Chỉn chu", wrong: "Chỉnh chu", example: "Ăn mặc chỉn chu trước khi ra ngoài." },
+            { correct: "Tròng trành", wrong: "Chòng chành", example: "Chiếc thuyền tròng trành trên sóng nước." },
+            { correct: "Chua xót", wrong: "Chua sót", example: "Cảm giác chua xót khi nhìn thấy cảnh nghèo khó." },
+            { correct: "Chần đoán", wrong: "Chuẩn đoán", example: "Bác sĩ chẩn đoán bệnh rất chính xác." },
+            { correct: "Cọ xát", wrong: "Cọ sát", example: "Học sinh cần cọ xát qua nhiều kỳ thi thử." },
+            { correct: "Cổ xúy", wrong: "Cổ súy", example: "Chúng ta không nên cổ xúy cho hành vi bạo lực." },
+            { correct: "Cùng một giuộc", wrong: "Cùng một duộc", example: "Mấy đứa lười biếng đó đều cùng một giuộc cả." },
+            { correct: "Dã tràng", wrong: "Giã tràng", example: "Công sức đổ sông đổ biển giống như dã tràng xe cát." },
+            { correct: "Giậm chân", wrong: "Đậm chân", example: "Giậm chân tại chỗ không có tiến bộ." },
+            { correct: "Dân dã", wrong: "Dân giả", example: "Món ăn mang hương vị dân dã miền quê." },
+            { correct: "Giàn giụa", wrong: "Đàn dụa", example: "Nước mắt giàn giụa khi nghe tin xúc động." },
+            { correct: "Giằng xé", wrong: "Đằng xé", example: "Tâm trạng giằng xé giữa hai sự lựa chọn." },
+            { correct: "Dành dụm", wrong: "Giành dụm", example: "Tôi tích cực dành dụm tiền mua sách." },
+            { correct: "Giành giật", wrong: "Đành giật", example: "Hai đội giành giật nhau từng điểm một." },
+            { correct: "Giấu giếm", wrong: "Dấu diếm", example: "Hành động giấu giếm không muốn ai biết." },
+            { correct: "Đầy ắp", wrong: "Đầy ấp", example: "Kỷ niệm đầy ắp tiếng cười tuổi thơ." },
+            { correct: "Giày vò", wrong: "Dày vò", example: "Nỗi ân hận giày vò tâm trí anh ấy." },
+            { correct: "Giày xéo", wrong: "Dày xéo", example: "Không được để kẻ thù giày xéo quê hương." },
+            { correct: "Đề huề", wrong: "Đuề huề", example: "Cả nhà sum họp vui vẻ đề huề." },
+            { correct: "Dè xẻn", wrong: "Đè xẻn", example: "Chi tiêu dè xẻn trong những ngày khó khăn." },
+            { correct: "Điểm xuyết", wrong: "Điểm xuyến", example: "Một vài đóa hoa điểm xuyết cho bức tranh." },
+            { correct: "Độc giả", wrong: "Đọc giả", example: "Độc giả gửi nhiều phản hồi về cho tòa soạn." },
+            { correct: "Dữ dội", wrong: "Giữ dội", example: "Cơn bão đổ bộ dữ dội vào đất liền." },
+            { correct: "Dư dả", wrong: "Đư giả", example: "Cuộc sống gia đình dạo này đã dư dả hơn." },
+            { correct: "Đường sá", wrong: "Đường xá", example: "Đường sá thành phố ngày càng hiện đại." },
+            { correct: "Gia nhập", wrong: "Ra nhập", example: "Tôi vừa gia nhập câu lạc bộ ghi-ta." },
+            { correct: "Dã tâm", wrong: "Giả tâm", example: "Kẻ địch lộ rõ dã tâm xâm lược." },
+            { correct: "Giận dữ", wrong: "Giận giữ", example: "Ánh mắt giận dữ trông thật đáng sợ." },
+            { correct: "Gian xảo", wrong: "Gian sảo", example: "Lời nói gian xảo không đáng tin cậy." },
+            { correct: "Giáp ranh", wrong: "Giáp danh", example: "Khu đất nằm ở vùng giáp ranh hai tỉnh." },
+            { correct: "Giãy giụa", wrong: "Đãy dụa", example: "Con cá giãy giụa trên cạn." },
+            { correct: "Dây mực", wrong: "Giấy mực", example: "Cẩn thận kẻo dây mực ra quần áo." },
+            { correct: "Giở trò", wrong: "Đở trò", example: "Tên trộm định giở trò gian lận liền bị bắt." },
+            { correct: "Giùm", wrong: "Dùm", example: "Bạn làm ơn lấy giùm tôi cuốn sổ." },
+            { correct: "Hàm súc", wrong: "Hàm xúc", example: "Bài văn ngắn gọn mà hàm súc." },
+            { correct: "Hằng ngày", wrong: "Hàng ngày", example: "Đánh răng hằng ngày để bảo vệ sức khỏe." },
+            { correct: "Hội chẩn", wrong: "Hội chuẩn", example: "Các giáo sư đầu ngành đang tiến hành hội chẩn." },
+            { correct: "Kết cục", wrong: "Kết cuộc", example: "Câu chuyện có một kết cục vô cùng viên mãn." },
+            { correct: "Khắt khe", wrong: "Khắc khe", example: "Yêu cầu tuyển chọn rất khắt khe." },
+            { correct: "Khảng khái", wrong: "Khẳng khái", example: "Tính tình khảng khái, thấy việc nghĩa là làm." },
+            { correct: "Khi dể", wrong: "Khi dễ", example: "Không được kiêu ngạo mà khi dể người khác." },
+            { correct: "Khinh suất", wrong: "Khinh xuất", example: "Làm việc khinh suất rất dễ gây ra hậu quả xấu." },
+            { correct: "Khoảnh khắc", wrong: "Khoảng khắc", example: "Ghi lại khoảnh khắc đáng nhớ của gia đình." },
+            { correct: "Kiềm chế", wrong: "Kim chế", example: "Cần phải kiềm chế cơn tức giận." },
+            { correct: "Lãi suất", wrong: "Lãi xuất", example: "Ngân hàng vừa thông báo điều chỉnh lãi suất." },
+            { correct: "Lãng mạn", wrong: "Lãng mạng", example: "Khung cảnh hoàng hôn trên biển thật lãng mạn." },
+            { correct: "Lí trí", wrong: "Lí chí", example: "Hãy để lí trí dẫn đường khi đưa ra quyết định." },
+            { correct: "Liêu xiêu", wrong: "Liêu siêu", example: "Bóng dáng gầy gò liêu xiêu dưới nắng chiều." },
+            { correct: "Lụn bại", wrong: "Lụi bại", example: "Sự lười biếng khiến sự nghiệp dần lụn bại." },
+            { correct: "Ma trơi", wrong: "Ma chơi", example: "Đốm lửa ma trơi xuất hiện ở bãi nghĩa địa cũ." },
+            { correct: "Mài giũa", wrong: "Mài dũa", example: "Tài năng cần được mài giũa qua thời gian." },
+            { correct: "Mộc nhĩ", wrong: "Mọc nhĩ", example: "Mộc nhĩ là nguyên liệu làm nem cuốn." },
+            { correct: "Năng suất", wrong: "Năng xuất", example: "Ứng dụng công nghệ giúp tăng năng suất cây trồng." },
+            { correct: "Nền nếp", wrong: "Nề nếp", example: "Gia đình sống rất gia phong, nền nếp." },
+            { correct: "Ngang tàng", wrong: "Ngang tàn", example: "Tính cách ngang tàng, không chịu khuất phục." },
+            { correct: "Nguệch ngoạc", wrong: "Nghệch ngoạc", example: "Nét chữ nguệch ngoạc khó đọc." },
+            { correct: "Nhậm chức", wrong: "Nhận chức", example: "Giám đốc mới vừa làm lễ nhậm chức sáng nay." },
+            { correct: "Nói sõi", wrong: "Nói sỏi", example: "Em bé mới hai tuổi nhưng đã nói sõi." },
+            { correct: "Nơm nớp", wrong: "Lơm lớp", example: "Lúc nào cũng nơm nớp lo sợ bị phát hiện." },
+            { correct: "Nước xốt", wrong: "Nước sốt", example: "Món mì Ý có nước xốt cà chua rất ngon." },
+            { correct: "Phố xá", wrong: "Phố sá", example: "Phố xá đông đúc đèn hoa rực rỡ." },
+            { correct: "Rải rác", wrong: "Đải rác", example: "Lá vàng rơi rải rác trên sân trường." },
+            { correct: "Ráo riết", wrong: "Đáo riết", example: "Công anh đang ráo riết truy tìm thủ phạm." },
+            { correct: "Rời mắt", wrong: "Đời mắt", example: "Vẻ đẹp khiến tôi không thể rời mắt." },
+            { correct: "Ròng rã", wrong: "Đòng rã", example: "Anh ấy đã nghiên cứu suốt ba tháng ròng rã." },
+            { correct: "Dõng dạc", wrong: "Gióng giạc", example: "Bạn lớp trưởng dõng dạc đọc bài thơ." },
+            { correct: "Rốt cuộc", wrong: "Rốt cục", example: "Rốt cuộc thì mọi cố gắng cũng được đền đáp." },
+            { correct: "Rướn người", wrong: "Đướn người", example: "Cố rướn người lên để lấy quả trên cành." },
+            { correct: "Sắc sảo", wrong: "Sắc xảo", example: "Lời lập luận vô cùng sắc sảo." },
+            { correct: "Sạch sẽ", wrong: "Sạch xẽ", example: "Giữ gìn nhà cửa ngăn nắp sạch sẽ." },
+            { correct: "Sai sót", wrong: "Sai xót", example: "Hãy kiểm tra kỹ để tránh sai sót không đáng có." },
+            { correct: "Xài tiền", wrong: "Sài tiền", example: "Không nên xài tiền một cách hoang phí." },
+            { correct: "Sản xuất", wrong: "Sản suất", example: "Nhà máy đang đẩy mạnh sản xuất hàng hóa." },
+            { correct: "Xán lạn", wrong: "Sáng lạng", example: "Chúc bạn có một tương lai xán lạn." },
+            { correct: "Sành sỏi", wrong: "Sành sõi", example: "Anh ấy là một tay buôn đồ cổ rất sành sỏi." },
+            { correct: "Sáp nhập", wrong: "Sát nhập", example: "Hai công ty nhỏ sáp nhập thành một tập đoàn." },
+            { correct: "Say sưa", wrong: "Say xưa", example: "Học sinh say sưa lắng nghe cô giảng bài." },
+            { correct: "Se sua", wrong: "Xe xua", example: "Tính tình thích se sua ăn diện." },
+            { correct: "Sinh thiết", wrong: "Sinh tiết", example: "Lấy mẫu bệnh phẩm để làm xét nghiệm sinh thiết." },
+            { correct: "Sơ sài", wrong: "Xơ xài", example: "Bài làm chuẩn bị quá sơ sài." },
+            { correct: "Sơ suất", wrong: "Sơ xuất", example: "Chỉ vì một phút sơ suất mà hỏng cả đại sự." },
+            { correct: "Súc tích", wrong: "Xúc tích", example: "Bài phát biểu ngắn gọn nhưng đầy súc tích." },
+            { correct: "Sum suê", wrong: "Xum xuê", example: "Cây cam trong vườn quả sai sum suê." },
+            { correct: "Sung quỹ", wrong: "Xung quỹ", example: "Số tiền phạt sẽ được đem sung quỹ nhà nước." },
+            { correct: "Sừng sộ", wrong: "Sừng xộ", example: "Anh ta sừng sộ nổi giận quát tháo." },
+            { correct: "Tham quan", wrong: "Thăm quan", example: "Trường tổ chức cho học sinh đi tham quan lăng Bác." },
+            { correct: "Thức dậy", wrong: "Thức dạy", example: "Tôi thường thức dậy lúc 6 giờ sáng." },
+            { correct: "Tiếng lóng", wrong: "Tiếng nóng", example: "Giới trẻ ngày nay sử dụng nhiều tiếng lóng." },
+            { correct: "Trân trọng", wrong: "Chân trọng", example: "Xin trân trọng cảm ơn quý vị khách quý." },
+            { correct: "Trau chuốt", wrong: "Trao chuốt", example: "Nhà văn trau chuốt từng câu chữ." },
+            { correct: "Trau dồi", wrong: "Trau giồi", example: "Học sinh cần không ngừng trau dồi đạo đức." },
+            { correct: "Trịch thượng", wrong: "Trịnh thượng", example: "Thái độ trịch thượng xem thường người khác." },
+            { correct: "Trơn tru", wrong: "Trơn chu", example: "Bài thuyết trình diễn ra rất trơn tru." },
+            { correct: "Trung chuyển", wrong: "Chung chuyển", example: "Cảng hàng không quốc tế là trạm trung chuyển lớn." },
+            { correct: "Tựu trung", wrong: "Tựu chung", example: "Các ý kiến tựu trung lại đều muốn tốt cho lớp." },
+            { correct: "Vô hình trung", wrong: "Vô hình chung", example: "Cách làm đó vô hình trung lại gây khó khăn cho bạn." },
+            { correct: "Vô vàn", wrong: "Vô vàng", example: "Gửi tặng bạn vô vàn lời chúc tốt đẹp." },
+            { correct: "Vững chãi", wrong: "Vững trãi", example: "Cội cây cổ thụ bám rễ vững chãi." },
+            { correct: "Xa hoa", wrong: "Sa hoa", example: "Cuộc sống xa hoa lãng phí không bền vững." },
+            { correct: "Xác suất", wrong: "Xác xuất", example: "Xác suất trúng giải là rất thấp." },
+            { correct: "Xấc xược", wrong: "Xắc xược", example: "Thái độ xấc xược với người lớn tuổi." },
+            { correct: "Xảo quyệt", wrong: "Xảo quệt", example: "Con cáo già vô cùng gian trá và xảo quyệt." },
+            { correct: "Xem xét", wrong: "Xem sét", example: "Ban giám đốc đang xem xét đơn ứng tuyển." },
+            { correct: "Xịn sò", wrong: "Xịn xò", example: "Chiếc điện thoại mới mua trông xịn sò thật." },
+            { correct: "Xoay sở", wrong: "Xoay xở", example: "Mẹ cố gắng xoay sở lo tiền học phí cho con." },
+            { correct: "Xử lí", wrong: "Sử lí", example: "Hệ thống đang xử lí dữ liệu đầu vào." },
+            { correct: "Xứ sở", wrong: "Sứ sở", example: "Đà Lạt được mệnh danh là xứ sở sương mù." },
+            { correct: "Xử sự", wrong: "Xử xự / Sử sự", example: "Cách xử sự khéo léo giúp giữ gìn các mối quan hệ." },
+            { correct: "Xù xì", wrong: "Sù sì", example: "Thân cây già cỗi, lớp vỏ xù xì đại ngàn." },
+            { correct: "Suất cơm", wrong: "Xuất cơm", example: "Mỗi bạn học sinh nhận một suất cơm trưa." },
+            { correct: "Xuất sắc", wrong: "Xuất xắc", example: "Thành tích học tập đạt loại xuất sắc." },
+            { correct: "Xúi giục", wrong: "Xúi dục", example: "Kẻ xấu xúi giục nhẹ dạ làm chuyện trái pháp luật." },
+            { correct: "Ý chí", wrong: "Ý trí", example: "Ý chí kiên cường giúp vượt qua mọi thử thách." },
+            { correct: "Bạt mạng", wrong: "Bạc mạng", example: "Lái xe bạt mạng nguy hiểm tính mạng." },
+            { correct: "Cập bến", wrong: "Cặp bến", example: "Con tàu neo đậu an toàn khi cập bến." },
+            { correct: "Công suất", wrong: "Công xuất", example: "Máy móc vận hành hết công suất thiết kế." },
+            { correct: "Câu chuyện", wrong: "Câu truyện", example: "Ông bà kể lại câu chuyện ngày xửa ngày xưa." },
+            { correct: "Chứng giám", wrong: "Chứng dám", example: "Xin trời đất chứng giám lòng thành này." },
+            { correct: "Muồi mẫn", wrong: "Mùi mẫn", example: "Bộ phim tình cảm có những cảnh quay thật muồi mẫn." },
+            { correct: "Chỉnh sửa", wrong: "Chính sửa", example: "Biên tập viên đang chỉnh sửa bản thảo văn học." },
+            { correct: "Thiện chí", wrong: "Thiện trí", example: "Hai bên hợp tác trên tinh thần thiện chí." },
+            { correct: "Tréo ngoe", wrong: "Chéo ngoe", example: "Hoàn cảnh tréo ngoe đẩy hai người vào xa cách." },
+            { correct: "Giằng níu", wrong: "Dằng níu", example: "Sự giằng níu của những kỷ niệm xưa cũ." },
+            { correct: "Giãy nảy", wrong: "Dãy nảy", example: "Nghe thấy tin không vui, cô ấy giãy nảy lên." },
+            { correct: "Ngành", wrong: "Nghành", example: "Ngành y tế đang nỗ lực chăm sóc sức khỏe nhân dân." },
+            { correct: "Mải mê", wrong: "Mãi mê", example: "Mải mê chơi game quên cả giờ ăn cơm." },
+            { correct: "Giục giã", wrong: "Giục dã", example: "Tiếng trống trường giục giã bước chân em." },
+            { correct: "Xỉa xói", wrong: "Sỉa sói", example: "Đừng nói lời xỉa xói làm tổn thương lòng tự trọng." },
+            { correct: "Sĩ số", wrong: "Sỉ số", example: "Sĩ số lớp học hôm nay hiện diện đầy đủ." },
+            { correct: "Thẳng thắn", wrong: "Thẳng thắng", example: "Chúng ta cần thẳng thắn phê bình khuyết điểm." },
+            { correct: "Xe duyên", wrong: "Se duyên", example: "Ông Tơ Bà Nguyệt khéo léo xe duyên đôi lứa." },
+            { correct: "Xe điếu", wrong: "Se điếu", example: "Tiếng điếu cày kêu giòn tan như xe điếu." },
+            { correct: "Sưng sỉa", wrong: "Xung xia", example: "Khuôn mặt sưng sỉa hờn dỗi không nói một lời." },
+            { correct: "Sung công", wrong: "Xung công", example: "Tịch thu tài sản bất chính đem sung công quỹ." },
+            { correct: "Bánh giày / bánh giầy", wrong: "Bánh dày", example: "Bánh chưng bánh giầy là lễ vật dâng vua Hùng." },
+            { correct: "Bơi trải", wrong: "Bơi chải", example: "Hội bơi trải truyền thống trên sông tấp nập người xem." },
+            { correct: "Trầy trật", wrong: "Chầy chật", example: "Trầy trật mãi mới hoàn thành xong bài tập khó." },
+            { correct: "Vãng lai", wrong: "Vàng lai", example: "Khách vãng lai ghé thăm đền thờ cổ kính." },
+            { correct: "Viển vông", wrong: "Viễn vông", example: "Ước mơ viển vông xa rời thực tế." },
+            { correct: "Viễn vọng", wrong: "Viển vọng", example: "Kính viễn vọng dùng để quan sát các vì sao." }
+        ];
+
+        let database = [...defaultQuestions];
+        let quizQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+        let selectedCount = 20;
+        let isPaused = false;
+
+        function playSound(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain); gain.connect(ctx.destination);
+                if (type === 'correct') {
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    osc.start(); osc.stop(ctx.currentTime + 0.25);
+                } else {
+                    osc.frequency.setValueAtTime(180, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    osc.start(); osc.stop(ctx.currentTime + 0.3);
+                }
+            } catch(e) { console.log("Audio Error context", e); }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function setCount(count, btn) {
+            selectedCount = count;
+            document.querySelectorAll('.select-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function goToSetup() {
+            document.getElementById('result-screen').classList.remove('active-screen');
+            document.getElementById('quiz-screen').classList.remove('active-screen');
+            document.getElementById('setup-screen').classList.add('active-screen');
+        }
+
+        function goHome() {
+            if (confirm("Bạn có chắc chắn muốn hủy lượt học này và về Trang chủ không nè?")) {
+                goToSetup();
+            }
+        }
+
+        function togglePause() {
+            isPaused = !isPaused;
+            if (isPaused) {
+                document.getElementById('pauseModal').style.display = 'flex';
+            } else {
+                document.getElementById('pauseModal').style.display = 'none';
+            }
+        }
+
+        function startQuiz() {
+            shuffleArray(database);
+            let count = selectedCount === 'all' ? database.length : Math.min(selectedCount, database.length);
+            quizQuestions = database.slice(0, count);
+
+            currentQuestionIndex = 0;
+            score = 0;
+            isPaused = false;
+
+            document.getElementById('setup-screen').classList.remove('active-screen');
+            document.getElementById('result-screen').classList.remove('active-screen');
+            document.getElementById('quiz-screen').classList.add('active-screen');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answered = false;
+            document.getElementById('explanation-box').style.display = 'none';
+            
+            let q = quizQuestions[currentQuestionIndex];
+            
+            let progressPercent = (currentQuestionIndex / quizQuestions.length) * 100;
+            document.getElementById('progress').style.width = `${progressPercent}%`;
+            
+            document.getElementById('question').innerText = `Từ nào viết ĐÚNG chính tả vậy ta? 🤔`;
+
+            let options = [
+                { text: q.correct, isCorrect: true },
+                { text: q.wrong, isCorrect: false }
+            ];
+            shuffleArray(options);
+
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = `🌸 ${opt.text}`;
+                btn.onclick = () => selectOption(btn, opt.isCorrect);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedBtn, isCorrect) {
+            if (answered || isPaused) return;
+            answered = true;
+
+            let q = quizQuestions[currentQuestionIndex];
+
+            if (isCorrect) {
+                selectedBtn.classList.add('correct');
+                playSound('correct');
+                score++;
+            } else {
+                selectedBtn.classList.add('incorrect');
+                playSound('wrong');
+                Array.from(document.getElementById('options').children).forEach(btn => {
+                    if (btn.innerText.includes(q.correct)) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+
+            document.getElementById('explanation-text').innerHTML = `Từ đúng chuẩn chỉnh là: <b>"${q.correct}"</b>.<br>💡 <i>Ngữ cảnh: ${q.example}</i>`;
+            document.getElementById('explanation-box').style.display = 'block';
+        }
+
+        function nextQuestion() {
+            if (isPaused) return;
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('quiz-screen').classList.remove('active-screen');
+            document.getElementById('result-screen').classList.add('active-screen');
+            
+            document.getElementById('final-score').innerText = `${score}/${quizQuestions.length}`;
+            
+            let percent = (score / quizQuestions.length) * 100;
+            let cheer = "";
+            if (percent === 100) cheer = "Tuyệt đỉnh xuất sắc! Cậu là chiến thần chính tả rồi! 👑🏆";
+            else if (percent >= 80) cheer = "Giỏi quá xá! Suýt chút nữa là hoàn hảo rồi nè! ⭐";
+            else if (percent >= 50) cheer = "Khá ổn áp rồi, chăm chỉ luyện tập thêm xíu nha cục vàng! 🌸";
+            else cheer = "Đừng nản chí nhé, cùng học lại hiệp mới để nhớ sâu hơn nào! 💪🌸";
+            
+            document.getElementById('cheer-text').innerText = cheer;
+        }
+
+        function openModal() { document.getElementById('addModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('addModal').style.display = 'none'; }
+
+        function addNewQuestion() {
+            const correctInput = document.getElementById('newWordCorrect').value.trim();
+            const wrongInput = document.getElementById('newWordWrong').value.trim();
+            const exampleInput = document.getElementById('newExample').value.trim();
+
+            if (!correctInput || !wrongInput) {
+                alert("Bạn nhỏ vui lòng điền đầy đủ từ đúng và từ sai nhé! 💕");
+                return;
+            }
+
+            const newQ = {
+                correct: correctInput,
+                wrong: wrongInput,
+                example: exampleInput || "Chưa có ví dụ cụ thể."
+            };
+
+            database.push(newQ);
+
+            // Reset form
+            document.getElementById('newWordCorrect').value = '';
+            document.getElementById('newWordWrong').value = '';
+            document.getElementById('newExample').value = '';
+
+            closeModal();
+            alert("Thêm từ mới thành công rồi nè! Thử chọn lại cấu hình để cập nhật nhé! ✨🌸");
+        }
+    </script>
+</body>
+</html>
