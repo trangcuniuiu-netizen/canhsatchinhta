@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vui Học Chính Tả Cùng Bé 🌸</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         /* --- PHONG CÁCH PASTEL KAWAII --- */
         :root {
@@ -52,6 +53,27 @@
             font-size: 26px;
             margin-top: 0;
             margin-bottom: 20px;
+        }
+
+        /* --- STREAK & KỶ LỤC WIDGET --- */
+        .stats-badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .stats-badge {
+            background-color: #FFF;
+            border: 2px solid #FFE0B2;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         /* --- LƯU Ý LUÔN HIỆN --- */
@@ -227,6 +249,14 @@
             box-shadow: 0 6px 15px rgba(255, 105, 180, 0.5);
         }
 
+        .btn-wrong-practice {
+            background-color: #FF9800 !important;
+            box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3) !important;
+        }
+        .btn-wrong-practice:hover {
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.5) !important;
+        }
+
         .add-q-btn {
             position: absolute;
             top: 15px;
@@ -289,9 +319,14 @@
     <div class="container">
         <button class="add-q-btn" onclick="openModal()" title="Thêm từ mới vào kho nè!">➕</button>
         
-        <!-- MÀN HÌNH SETUP -->
         <div id="setup-screen" class="screen active-screen setup-screen">
             <h1>Hôm nay học mấy từ nè? 🌸</h1>
+            
+            <div class="stats-badge-container">
+                <div class="stats-badge" title="Số ngày học liên tiếp chuẩn chỉ">🔥 <span id="streak-val">0</span> Ngày</div>
+                <div class="stats-badge" title="Kỷ lục điểm số cao nhất của cậu">🏆 Kỷ lục: <span id="highscore-val">0/0</span></div>
+            </div>
+
             <p style="font-size: 15px; color: #777; margin: 0 10px;">Chọn số lượng câu hỏi để cùng bứt phá chính tả nhé cục vàng!</p>
             <div class="select-group">
                 <button class="select-btn active" onclick="setCount(20, this)">20 Từ</button>
@@ -302,7 +337,6 @@
             <button class="action-btn" onclick="startQuiz()">Vào Học Ngay Kẻo Muộn! 🚀</button>
         </div>
 
-        <!-- MÀN HÌNH CÂU HỎI -->
         <div id="quiz-screen" class="screen">
             <div class="quiz-controls">
                 <button class="control-btn" onclick="goHome()">🏠 Trang chủ</button>
@@ -323,21 +357,22 @@
             </div>
         </div>
 
-        <!-- MÀN HÌNH KẾT QUẢ -->
         <div id="result-screen" class="screen">
             <h1>🎉 Kết Quả Của Cậu Nè! 🎉</h1>
             <div class="score" id="final-score">0/0</div>
             <div class="cheer-text" id="cheer-text">Cố lên nhé!</div>
-            <button class="action-btn" onclick="goToSetup()">Học tiếp hiệp mới 🔄</button>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+                <button class="action-btn btn-wrong-practice" id="btn-retry-wrong" onclick="startWrongPractice()" style="display:none;">Ôn Lại Danh Sách Từ Sai 🎯</button>
+                <button class="action-btn" onclick="goToSetup()">Học tiếp hiệp mới 🔄</button>
+            </div>
         </div>
     </div>
 
-    <!-- DÒNG LƯU Ý LUÔN LUÔN HIỆN TRÊN MÀN HÌNH -->
     <div class="sticky-note">
         ⚠️ CÓ THỂ SAI, NẾU PHÁT HIỆN SAI SÓT NHẮN TUI NHA! 💬
     </div>
 
-    <!-- MODAL THÊM CÂU HỎI -->
     <div class="modal" id="addModal">
         <div class="modal-content">
             <h3>Thêm Câu Hỏi Mới Giúp Bạn 🌸</h3>
@@ -351,7 +386,6 @@
         </div>
     </div>
 
-    <!-- MODAL TẠM DỪNG -->
     <div class="modal" id="pauseModal" style="z-index: 11;">
         <div class="modal-content">
             <h2 style="color: #FF69B4; margin-top:0;">⏸️ Đang Tạm Dừng</h2>
@@ -440,7 +474,7 @@
             { correct: "Xài tiền", wrong: "Sài tiền", example: "Không nên xài tiền một cách hoang phí." },
             { correct: "Sản xuất", wrong: "Sản suất", example: "Nhà máy đang đẩy mạnh sản xuất hàng hóa." },
             { correct: "Xán lạn", wrong: "Sáng lạng", example: "Chúc bạn có một tương lai xán lạn." },
-            { correct: "Sành sỏi", wrong: "Sành sõi", example: "Anh ấy là một tay buôn đồ cổ rất sành sỏi." },
+            { correct: "Sành sỏi", wrong: "Sành sõi", example: "Anh ấy là một tay buôn đồ cổ rất sỏi." },
             { correct: "Sáp nhập", wrong: "Sát nhập", example: "Hai công ty nhỏ sáp nhập thành một tập đoàn." },
             { correct: "Say sưa", wrong: "Say xưa", example: "Học sinh say sưa lắng nghe cô giảng bài." },
             { correct: "Se sua", wrong: "Xe xua", example: "Tính tình thích se sua ăn diện." },
@@ -510,11 +544,56 @@
 
         let database = [...defaultQuestions];
         let quizQuestions = [];
+        let wrongQuestions = []; // Mảng chứa danh sách các câu trả lời sai
         let currentQuestionIndex = 0;
         let score = 0;
         let answered = false;
         let selectedCount = 20;
         let isPaused = false;
+        let isWrongPracticeMode = false; // Trạng thái xem có đang ở chế độ luyện từ sai không
+
+        // Khởi tạo hệ thống Lịch sử lưu trữ khi web tải xong
+        window.onload = function() {
+            updateStatsUI();
+        };
+
+        function updateStatsUI() {
+            // Tính toán / cập nhật Streak ngày học liên tiếp
+            let lastLearnDate = localStorage.getItem('lastLearnDate');
+            let currentStreak = parseInt(localStorage.getItem('studyStreak') || '0');
+            const todayStr = new Date().toDateString();
+
+            if (lastLearnDate) {
+                const lastDate = new Date(lastLearnDate);
+                const today = new Date(todayStr);
+                const diffTime = Math.abs(today - lastDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                if (diffDays > 1) {
+                    // Quá 1 ngày không học -> reset streak về lại 0
+                    currentStreak = 0;
+                    localStorage.setItem('studyStreak', '0');
+                }
+            }
+            document.getElementById('streak-val').innerText = currentStreak;
+
+            // Hiển thị kỷ lục điểm số cao nhất
+            let highscore = localStorage.getItem('highScore') || "0";
+            let highTotal = localStorage.getItem('highTotal') || "0";
+            document.getElementById('highscore-val').innerText = `${highscore}/${highTotal}`;
+        }
+
+        function triggerConfetti() {
+            // Hiệu ứng pháo hoa ăn mừng rực rỡ từ 2 phía màn hình
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 } });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 } });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
+        }
 
         function playSound(type) {
             try {
@@ -549,6 +628,7 @@
         }
 
         function goToSetup() {
+            updateStatsUI();
             document.getElementById('result-screen').classList.remove('active-screen');
             document.getElementById('quiz-screen').classList.remove('active-screen');
             document.getElementById('setup-screen').classList.add('active-screen');
@@ -570,15 +650,33 @@
         }
 
         function startQuiz() {
+            isWrongPracticeMode = false;
             shuffleArray(database);
             let count = selectedCount === 'all' ? database.length : Math.min(selectedCount, database.length);
             quizQuestions = database.slice(0, count);
 
             currentQuestionIndex = 0;
             score = 0;
+            wrongQuestions = [];
             isPaused = false;
 
             document.getElementById('setup-screen').classList.remove('active-screen');
+            document.getElementById('result-screen').classList.remove('active-screen');
+            document.getElementById('quiz-screen').classList.add('active-screen');
+            loadQuestion();
+        }
+
+        // BẮT ĐẦU CHẾ ĐỘ LUYỆN TẬP TỪ SAI
+        function startWrongPractice() {
+            isWrongPracticeMode = true;
+            shuffleArray(wrongQuestions);
+            quizQuestions = [...wrongQuestions]; // Lấy danh sách từ làm sai để test lại
+
+            currentQuestionIndex = 0;
+            score = 0;
+            wrongQuestions = []; // Reset lại để nhặt tiếp nếu bé lại làm sai
+            isPaused = false;
+
             document.getElementById('result-screen').classList.remove('active-screen');
             document.getElementById('quiz-screen').classList.add('active-screen');
             loadQuestion();
@@ -593,7 +691,11 @@
             let progressPercent = (currentQuestionIndex / quizQuestions.length) * 100;
             document.getElementById('progress').style.width = `${progressPercent}%`;
             
-            document.getElementById('question').innerText = `Từ nào viết ĐÚNG chính tả vậy ta? 🤔`;
+            if(isWrongPracticeMode) {
+                document.getElementById('question').innerHTML = `🎯 <b>Ôn tập từ sai:</b> Từ nào viết ĐÚNG chính tả nè?`;
+            } else {
+                document.getElementById('question').innerText = `Từ nào viết ĐÚNG chính tả vậy ta? 🤔`;
+            }
 
             let options = [
                 { text: q.correct, isCorrect: true },
@@ -626,6 +728,10 @@
             } else {
                 selectedBtn.classList.add('incorrect');
                 playSound('wrong');
+                
+                // Gom từ sai lại để phục vụ tính năng số 4
+                wrongQuestions.push(q);
+
                 Array.from(document.getElementById('options').children).forEach(btn => {
                     if (btn.innerText.includes(q.correct)) {
                         btn.classList.add('correct');
@@ -655,12 +761,61 @@
             
             let percent = (score / quizQuestions.length) * 100;
             let cheer = "";
-            if (percent === 100) cheer = "Tuyệt đỉnh xuất sắc! Cậu là chiến thần chính tả rồi! 👑🏆";
-            else if (percent >= 80) cheer = "Giỏi quá xá! Suýt chút nữa là hoàn hảo rồi nè! ⭐";
+            if (percent === 100) {
+                cheer = "Tuyệt đỉnh xuất sắc! Cậu là chiến thần chính tả rồi! 👑🏆";
+                triggerConfetti(); // Bắn pháo hoa tưng bừng khi đúng 100%
+            }
+            else if (percent >= 80) {
+                cheer = "Giỏi quá xá! Suýt chút nữa là hoàn hảo rồi nè! ⭐";
+                triggerConfetti(); // Khích lệ bằng pháo hoa nhẹ nhàng
+            }
             else if (percent >= 50) cheer = "Khá ổn áp rồi, chăm chỉ luyện tập thêm xíu nha cục vàng! 🌸";
             else cheer = "Đừng nản chí nhé, cùng học lại hiệp mới để nhớ sâu hơn nào! 💪🌸";
             
             document.getElementById('cheer-text').innerText = cheer;
+
+            // Xử lý logic tính năng số 1: Cập nhật Streak & Kỷ lục điểm số
+            if (!isWrongPracticeMode) { 
+                // Cập nhật kỷ lục cá nhân
+                let oldHighScore = parseInt(localStorage.getItem('highScore') || '0');
+                if (score > oldHighScore) {
+                    localStorage.setItem('highScore', score);
+                    localStorage.setItem('highTotal', quizQuestions.length);
+                }
+
+                // Cập nhật Streak ngày học liên tiếp
+                let lastLearnDate = localStorage.getItem('lastLearnDate');
+                let currentStreak = parseInt(localStorage.getItem('studyStreak') || '0');
+                const todayStr = new Date().toDateString();
+
+                if (lastLearnDate !== todayStr) {
+                    if (lastLearnDate) {
+                        const lastDate = new Date(lastLearnDate);
+                        const today = new Date(todayStr);
+                        const diffTime = Math.abs(today - lastDate);
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                        if (diffDays === 1) {
+                            currentStreak += 1;
+                        } else if (diffDays > 1) {
+                            currentStreak = 1;
+                        }
+                    } else {
+                        currentStreak = 1;
+                    }
+                    localStorage.setItem('studyStreak', currentStreak);
+                    localStorage.setItem('lastLearnDate', todayStr);
+                }
+            }
+
+            // Xử lý hiển thị nút ôn tập từ sai (Tính năng số 4)
+            const retryWrongBtn = document.getElementById('btn-retry-wrong');
+            if (wrongQuestions.length > 0) {
+                retryWrongBtn.innerText = `Ôn Lại Danh Sách ${wrongQuestions.length} Từ Sai 🎯`;
+                retryWrongBtn.style.display = 'block';
+            } else {
+                retryWrongBtn.style.display = 'none';
+            }
         }
 
         function openModal() { document.getElementById('addModal').style.display = 'flex'; }
