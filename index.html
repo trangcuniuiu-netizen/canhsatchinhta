@@ -418,8 +418,8 @@
             </div>
 
             <div class="name-input-group">
-                <label for="player-name-field">✨ Nhập tên của bạn trước nhé (Bắt buộc):</label>
-                <input type="text" id="player-name-field" class="name-input-field" placeholder="Ví dụ: Cục vàng của anh 💖" maxlength="30">
+                <label for="player-name-field">✨ Nhập tên riêng để bắt đầu (Bắt buộc & Duy nhất):</label>
+                <input type="text" id="player-name-field" class="name-input-field" placeholder="Nhập tên duy nhất của bạn..." maxlength="30">
             </div>
 
             <p style="font-size: 14px; color: #777; margin: 5px 10px 0 10px;">Chọn số lượng câu hỏi để cùng bứt phá chính tả:</p>
@@ -429,7 +429,7 @@
                 <button class="select-btn" onclick="setCount(100, this)">100 Từ</button>
                 <button class="select-btn" onclick="setCount('all', this)">Tất cả từ</button>
             </div>
-            <button class="action-btn" onclick="startQuiz()">Vào Học Ngay Kẻo Muộn! 🚀</button>
+            <button class="action-btn" id="start-btn-el" onclick="startQuiz()">Vào Học Ngay Kẹo Muộn! 🚀</button>
         </div>
 
         <div id="quiz-screen" class="screen">
@@ -526,11 +526,11 @@
             { correct: "Chỉn chu", wrong: "Chỉnh chu", example: "Ăn mặc chỉn chu trước khi ra ngoài." },
             { correct: "Tròng trành", wrong: "Chòng chành", example: "Chiếc thuyền tròng trành trên sóng nước." },
             { correct: "Chua xót", wrong: "Chua sót", example: "Cảm giác chua xót khi nhìn thấy cảnh nghèo khó." },
-            { correct: "Chẩn đoán", wrong: "Chuẩn đoán", example: "Bác sĩ chẩn đoán bệnh rất chính xác." },
+            { correct: "Chần đoán", wrong: "Chuẩn đoán", example: "Bác sĩ chẩn đoán bệnh rất chính xác." },
             { correct: "Cọ xát", wrong: "Cọ sát", example: "Học sinh cần cọ xát qua nhiều kỳ thi thử." },
             { correct: "Cổ xúy", wrong: "Cổ súy", example: "Chúng ta không nên cổ xúy cho hành vi bạo lực." },
             { correct: "Cùng một giuộc", wrong: "Cùng một duộc", example: "Mấy đứa lười biếng đó đều cùng một giuộc cả." },
-            { correct: "Dã tràng", wrong: "Giã tràng", example: "Công sức đổ sông đổ biển giống như dã tràng xe cát." },
+            { correct: "Dã tàng", wrong: "Giã tràng", example: "Công sức đổ sông đổ biển giống như dã tràng xe cát." },
             { correct: "Giậm chân", wrong: "Dậm chân", example: "Giậm chân tại chỗ không có tiến bộ." },
             { correct: "Dân dã", wrong: "Dân giả", example: "Món ăn mang hương vị dân dã miền quê." },
             { correct: "Giàn giụa", wrong: "Dàn dụa", example: "Nước mắt giàn giụa khi nghe tin xúc động." },
@@ -673,7 +673,7 @@
         let wrongQuestions = [];
         let currentQuestionIndex = 0;
         
-        let score = 100; // BAN ĐẦU MỖI HIỆP CÓ 100 ĐIỂM
+        let score = 100; 
         const PTS_PER_CORRECT = 10; 
         const PTS_PER_WRONG = 10;  
 
@@ -681,10 +681,10 @@
         let selectedCount = 20;
         let isPaused = false;
         let isWrongPracticeMode = false;
-        let currentPlayerName = "Người học ẩn danh 🐾";
+        let currentPlayerName = "";
 
         window.onload = function() {
-            // Lấy lại tên cũ đã từng nhập trước đó nếu có
+            // Lấy lại tên cũ đã từng chơi trên máy này (nếu có)
             let savedName = localStorage.getItem('lastPlayerName');
             if(savedName) {
                 document.getElementById('player-name-field').value = savedName;
@@ -784,16 +784,60 @@
             document.getElementById('pauseModal').style.display = isPaused ? 'flex' : 'none';
         }
 
-        function startQuiz() {
-            // KIỂM TRA BẮT BUỘC NHẬP TÊN
+        // --- KHÓA KIỂM TRA TRÙNG TÊN TRÊN ĐÁM MÂY ---
+        async function startQuiz() {
             const nameInput = document.getElementById('player-name-field').value.trim();
+            
+            // 1. BẮT BUỘC NHẬP TÊN
             if (!nameInput) {
-                alert("Cậu ơi, nhập tên của mình vào trước khi học nhé! 🥰📝");
+                alert("Cậu ơi, nhập tên của mình vào trước khi thi nhé! 🥰📝");
                 document.getElementById('player-name-field').focus();
                 return;
             }
-            
-            // Lưu tên vào bộ nhớ tạm để dùng
+
+            const startBtn = document.getElementById('start-btn-el');
+            startBtn.innerText = "Đang kiểm tra tên... 🔄";
+            startBtn.disabled = true;
+
+            try {
+                // Tải dữ liệu toàn bộ người chơi từ Đám mây về
+                let res = await fetch(LEADERBOARD_API_URL);
+                let cloudData = await res.json();
+
+                // 2. BẮT BUỘC MỖI TÊN CHỈ ĐƯỢC 1 NGƯỜI DÙNG
+                // Kiểm tra xem tên vừa nhập đã tồn tại trong danh sách của người khác chưa
+                let nameExists = cloudData.some(p => p.name.toLowerCase() === nameInput.toLowerCase());
+                let localSavedName = localStorage.getItem('lastPlayerName');
+
+                // Nếu tên đã tồn tại trên Cloud và KHÔNG PHẢI là tên cũ từng chơi của chính máy này
+                if (nameExists && (!localSavedName || localSavedName.toLowerCase() !== nameInput.toLowerCase())) {
+                    alert(`⚠️ Tên "${nameInput}" đã có người sử dụng rồi! Vui lòng chọn một tên khác độc nhất nha bạn nhỏ. 💕`);
+                    startBtn.innerText = "Vào Học Ngay Kẹo Muộn! 🚀";
+                    startBtn.disabled = false;
+                    document.getElementById('player-name-field').focus();
+                    return;
+                }
+
+                // Nếu là tên mới tinh hoàn toàn và hợp lệ, tự đăng ký một bản ghi giữ chỗ trên cloud
+                if (!nameExists) {
+                    cloudData.push({ name: nameInput, improvement: 0 });
+                    await fetch(LEADERBOARD_API_URL, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(cloudData)
+                    });
+                }
+
+            } catch (e) {
+                console.log("Lỗi kiểm tra tên trực tuyến:", e);
+                // Trường hợp mất mạng hoặc API lỗi, tạm cho qua dựa trên local nếu tên khớp
+            }
+
+            // Mở khóa nút bấm
+            startBtn.innerText = "Vào Học Ngay Kẹo Muộn! 🚀";
+            startBtn.disabled = false;
+
+            // Thiết lập thông tin người chơi hiện tại
             currentPlayerName = nameInput;
             localStorage.setItem('lastPlayerName', nameInput);
 
@@ -803,7 +847,7 @@
             quizQuestions = database.slice(0, count);
 
             currentQuestionIndex = 0;
-            score = 100; // Reset về 100 điểm ban đầu
+            score = 100; 
             wrongQuestions = [];
             isPaused = false;
 
@@ -811,7 +855,6 @@
             document.getElementById('result-screen').classList.remove('active-screen');
             document.getElementById('quiz-screen').classList.add('active-screen');
             
-            // Hiển thị tên lên màn hình làm bài
             document.getElementById('live-name-val').innerText = currentPlayerName;
 
             loadQuestion();
@@ -904,7 +947,6 @@
             }
         }
 
-        // TẢI BẢNG XẾP HẠNG TRỰC TUYẾN TỪ CLOUD
         async function openRankModal() {
             document.getElementById('rankModal').style.display = 'flex';
             document.getElementById('rank-loading').style.display = 'block';
@@ -945,7 +987,6 @@
 
         function closeRankModal() { document.getElementById('rankModal').style.display = 'none'; }
 
-        // TỰ ĐỘNG ĐỒNG BỘ ĐIỂM LÊN ĐÁM MÂY CHUNG
         async function syncImprovementToGlobal(diffScore) {
             try {
                 let res = await fetch(LEADERBOARD_API_URL);
@@ -956,7 +997,7 @@
                     if (diffScore >= 0) {
                         if(diffScore > existingUser.improvement) existingUser.improvement = diffScore;
                     } else {
-                        existingUser.improvement += diffScore; // Trừ điểm trực tiếp nếu thụt lùi
+                        existingUser.improvement += diffScore; 
                     }
                 } else {
                     data.push({ name: currentPlayerName, improvement: diffScore });
@@ -1040,7 +1081,6 @@
                     localStorage.setItem('lastLearnDate', todayStr);
                 }
 
-                // Tự động gửi kết quả tiến bộ/thụt lùi lên đám mây với tên đã nhập từ đầu
                 if (diffScore !== 0 && previousScore !== null) {
                     syncImprovementToGlobal(diffScore);
                 }
