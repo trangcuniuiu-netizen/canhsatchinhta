@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> CÀY TIẾNG VIỆT V-ACT 🌸</title>
+    <title> CÙNG HỌC TIẾNG VIỆT V-ACT 🌸</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         /* --- PHONG CÁCH PASTEL KAWAII CHUYÊN NGHIỆP --- */
@@ -39,15 +39,15 @@
         /* --- BỐ CỤC 3 CỘT RESPONSIVE --- */
         .main-layout {
             display: grid;
-            grid-template-columns: 280px 1fr 280px;
+            grid-template-columns: 300px 1fr 280px;
             gap: 20px;
             width: 100%;
-            max-width: 1300px;
+            max-width: 1340px;
             margin: 0 auto;
             align-items: start;
         }
 
-        /* --- CỘT TRÁI: ĐỒNG HỒ ĐẾM NGƯỢC XỊN SÒ --- */
+        /* --- CỘT TRÁI: ĐỒNG HỒ & ĐỘNG LỰC --- */
         .left-column {
             display: flex;
             flex-direction: column;
@@ -97,6 +97,31 @@
             margin-bottom: 2px;
         }
 
+        /* Khối danh ngôn dưới đồng hồ */
+        .quote-under-timer {
+            background: #FFFFFF;
+            border: 2px solid #FFC0CB;
+            border-radius: 18px;
+            padding: 15px;
+            font-size: 13px;
+            color: #C71585;
+            font-style: italic;
+            font-weight: 600;
+            line-height: 1.5;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(255, 192, 203, 0.2);
+            position: relative;
+        }
+        .quote-under-timer::before {
+            content: "“";
+            font-size: 30px;
+            color: #FFB6C1;
+            position: absolute;
+            top: -5px;
+            left: 10px;
+            font-family: Georgia, serif;
+        }
+
         /* --- CỘT GIỮA: KHU VỰC HỌC CHÍNH --- */
         .container {
             background: rgba(255, 255, 255, 0.95);
@@ -115,13 +140,54 @@
             margin-bottom: 20px;
         }
 
-        .module-title {
-            font-size: 14px;
-            font-weight: bold;
-            color: #555;
-            margin: 15px 0 5px 0;
+        /* Thiết kế Card cho từng Bước 1, Bước 2 đẹp hơn */
+        .step-card {
+            background: #FFFFFF;
+            border: 2px solid #FFE4E1;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 12px rgba(255, 182, 193, 0.1);
             text-align: left;
-            padding-left: 5px;
+            transition: all 0.2s ease;
+        }
+        .step-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 6px 16px rgba(255, 182, 193, 0.2);
+        }
+
+        .step-title {
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #FF1493;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Radio tùy chọn phong cách hơn */
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: #FFF9FA;
+            border: 1px solid #FFF0F5;
+            transition: all 0.2s;
+            color: #555;
+        }
+        .radio-option:hover {
+            background: #FFEFEF;
+            color: #FF1493;
+        }
+        .radio-option input[type="radio"] {
+            accent-color: #FF1493;
+            transform: scale(1.2);
         }
 
         /* --- CỘT PHẢI: 2 NOTE LƯU Ý --- */
@@ -157,7 +223,7 @@
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .stats-badge {
@@ -177,7 +243,7 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 8px;
             width: 100%;
-            margin-bottom: 15px;
+            margin-top: 5px;
         }
 
         .select-btn {
@@ -309,6 +375,21 @@
             text-align: left;
         }
 
+        .explanation-text-style {
+            font-size: 16px;
+            margin: 8px 0 0 0;
+            line-height: 1.6;
+        }
+
+        .explanation-text-style ul {
+            margin: 5px 0 0 0;
+            padding-left: 20px;
+        }
+
+        .explanation-text-style li {
+            margin-bottom: 6px;
+        }
+
         .next-btn, .action-btn {
             margin-top: 15px;
             background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
@@ -324,14 +405,14 @@
         }
 
         .next-btn:hover, .action-btn:hover {
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
         .btn-wrong-practice {
             background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%) !important;
         }
 
-        /* --- MODAL & ĐIỀU CHỈNH MAN HÌNH --- */
+        /* --- MODAL & ĐIỀU CHỈNH MÀN HÌNH --- */
         .modal {
             display: none;
             position: fixed;
@@ -356,7 +437,6 @@
         .score { font-size: 56px; font-weight: bold; color: #FF69B4; margin: 15px 0; }
         .cheer-text { font-size: 18px; font-weight: bold; color: #4CAF50; margin-bottom: 25px; padding: 0 10px; line-height: 1.4; }
 
-        /* Responsive cho màn hình nhỏ */
         @media (max-width: 950px) {
             .main-layout {
                 grid-template-columns: 1fr;
@@ -382,36 +462,40 @@
                     <div class="time-segment"><span id="cd-s">00</span>GIÂY</div>
                 </div>
             </div>
+            <div class="quote-under-timer" id="motivation-quote"></div>
         </div>
 
         <div class="container">
             
             <div id="setup-screen" class="screen active-screen">
-                <h1 style="margin-bottom: 5px;">✨ QUYẾT TÂM ĐẠT 300 ĐIỂM TIẾNG VIỆT VACT ✨</h1>
-                <p id="motivation-quote" style="font-size: 14px; color: #755; font-style: italic; font-weight: 600; margin: 15px 0; min-height: 40px; line-height: 1.4; padding: 0 10px; text-shadow: 0 0 1px rgba(0,0,0,0.05);"></p>
+                <h1 style="margin-bottom: 8px;">✨ QUYẾT TÂM ĐẠT ĐIỂM TỐI ĐA VACT ✨</h1>
 
                 <div class="stats-badge-container">
                     <div class="stats-badge">🔥 <span id="streak-val">0</span> Ngày liên tiếp</div>
                     <div class="stats-badge">🏆 Kỷ lục: <span id="highscore-val">0</span></div>
                 </div>
 
-                <div style="text-align: left; background: #fff; padding: 15px; border-radius: 18px; border: 2px solid #ffebf0;">
-                    <div style="font-weight: bold; margin-bottom: 10px; color: #FF1493; font-size: 15px;">🎯 Bước 1: Chọn Học Phần Của Cậu</div>
-                    <div style="display: flex; flex-direction: column; gap: 8px;">
-                        <label style="display: flex; align-items: center; gap: 10px; font-weight: bold; cursor: pointer; font-size: 15px;">
-                            <input type="radio" name="study-module" value="1" checked onchange="switchModule(1)"> 📝 Học phần 1: Những từ hay sai chính tả
+                <div class="step-card">
+                    <div class="step-title">🎯 Bước 1: Chọn Học Phần Của Cậu</div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <label class="radio-option">
+                            <input type="radio" name="study-module" value="1" checked onchange="switchModule(1)"> 
+                            <span>📝 Học phần 1: Những từ hay sai chính tả</span>
                         </label>
-                        <label style="display: flex; align-items: center; gap: 10px; font-weight: bold; cursor: pointer; font-size: 15px;">
-                            <input type="radio" name="study-module" value="2" onchange="switchModule(2)"> 💡 Học phần 2: Những cặp từ hay bị dùng nhầm lẫn (đều đúng chính tả)
+                        <label class="radio-option">
+                            <input type="radio" name="study-module" value="2" onchange="switchModule(2)"> 
+                            <span>💡 Học phần 2: Những cặp từ hay bị dùng nhầm lẫn (đều đúng chính tả)</span>
                         </label>
                     </div>
+                </div>
 
-                    <div style="font-weight: bold; margin: 15px 0 10px 0; color: #FF1493; font-size: 15px;">📊 Bước 2: Chọn Số Lượng Từ Để Ôn Luyện</div>
+                <div class="step-card">
+                    <div class="step-title">📊 Bước 2: Chọn Số Lượng Từ Để Ôn Luyện</div>
                     
                     <div id="group-count-1" class="select-group">
                         <button class="select-btn active" onclick="setCount(20, this)">20 Từ</button>
                         <button class="select-btn" onclick="setCount(50, this)">50 Từ</button>
-                        <button class="select-btn" onclick="setCount(100, this)">100 Từ</button>
+                        <button class="select-btn" onclick="setCount(100, this).">100 Từ</button>
                         <button class="select-btn" onclick="setCount('all', this)">Tất cả</button>
                     </div>
 
@@ -423,7 +507,7 @@
                     </div>
                 </div>
 
-                <button class="action-btn" style="width: 100%; margin-top: 20px;" onclick="startQuiz()">Bắt Đầu Học Ngay Thôi! 🚀</button>
+                <button class="action-btn" style="width: 100%; margin-top: 10px;" onclick="startQuiz()">Bắt Đầu Học Ngay Thôi! 🚀</button>
             </div>
 
             <div id="quiz-screen" class="screen">
@@ -445,7 +529,7 @@
                 
                 <div class="explanation-box" id="explanation-box">
                     <strong style="color: #E65100; font-size: 16px;" id="explanation-title">💡 Giải thích đáp án đúng:</strong>
-                    <p id="explanation-text" style="font-size: 16px; margin: 8px 0 0 0; line-height: 1.5;"></p>
+                    <p id="explanation-text" class="explanation-text-style"></p>
                     <br>
                     <button class="next-btn" id="next-btn" onclick="nextQuestion()">Câu tiếp theo 🐾</button>
                 </div>
@@ -468,7 +552,7 @@
                 ⚠️ CÓ THỂ SAI, NẾU PHÁT HIỆN SAI SÓT NHẮN TUI NHA! 💬
             </div>
             <div class="sticky-note blue-note">
-                CHO TUI XIN THÊM TỪ ĐỂ CÙNG NHAU HỌC NHE <3 💬
+                CHO TUI XIN THÊM TỪ ĐỂ CÙNG NHAU HỌC NHE &lt;3 💬
             </div>
         </div>
 
@@ -507,7 +591,7 @@
             { correct: "Đầy ắp", wrong: "Đầy ấp", example: "Kỷ niệm đầy ắp tiếng cười tuổi thơ." },
             { correct: "Giày vò", wrong: "Dày vò", example: "Nỗi ân hận giày vò tâm trí anh ấy." },
             { correct: "Giày xéo", wrong: "Dày xéo", example: "Không được để kẻ thù giày xéo quê hương." },
-            { correct: "Đề huề", wrong: "Đuề huề", example: "Cả nhà sum họp vui vẻ đề huề." },
+            { correct: "ĐỀ huề", wrong: "Đuề huề", example: "Cả nhà sum họp vui vẻ đề huề." },
             { correct: "Dè xẻn", wrong: "Đè xẻn", example: "Chi tiêu dè xẻn trong những ngày khó khăn." },
             { correct: "Điểm xuyết", wrong: "Điểm xuyến", example: "Một vài đóa hoa điểm xuyết cho bức tranh." },
             { correct: "Độc giả", wrong: "Đọc giả", example: "Độc giả gửi nhiều phản hồi về cho tòa soạn." },
@@ -542,7 +626,7 @@
             { correct: "Mài giũa", wrong: "Mài dũa", example: "Tài năng cần được mài giũa qua thời gian." },
             { correct: "Mộc nhĩ", wrong: "Mọc nhĩ", example: "Mộc nhĩ là nguyên liệu làm nem cuốn." },
             { correct: "Năng suất", wrong: "Năng xuất", example: "Ứng dụng công nghệ giúp tăng năng suất cây trồng." },
-            { correct: "Nen nếp", wrong: "Nề nếp", example: "Gia đình sống rất gia phong, nền nếp." },
+            { correct: "Nền nếp", wrong: "Nề nếp", example: "Gia đình sống rất gia phong, nền nếp." },
             { correct: "Ngang tàng", wrong: "Ngang tàn", example: "Tính cách ngang tàng, không chịu khuất phục." },
             { correct: "Nguệch ngoạc", wrong: "Nghệch ngoạc", example: "Nét chữ nguệch ngoạc khó đọc." },
             { correct: "Nhậm chức", wrong: "Nhận chức", example: "Giám đốc mới vừa làm lễ nhậm chức sáng nay." },
@@ -551,7 +635,7 @@
             { correct: "Nước xốt", wrong: "Nước sốt", example: "Món mì Ý có nước xốt cà chua rất ngon." },
             { correct: "Phố xá", wrong: "Phố sá", example: "Phố xá đông đúc đèn hoa rực rỡ." },
             { correct: "Rải rác", wrong: "Dải rác", example: "Lá vàng rơi rải rác trên sân trường." },
-            { correct: "Ráo riết", wrong: "Đáo riết", example: "Công anh đang ráo riết truy tìm thủ phạm." },
+            { correct: "Ráo riết", wrong: "Đáo riết", example: "Công an đang ráo riết truy tìm thủ phạm." },
             { correct: "Rời mắt", wrong: "Dời mắt", example: "Vẻ đẹp khiến tôi không thể rời mắt." },
             { correct: "Ròng rã", wrong: "Dòng rã", example: "Anh ấy đã nghiên cứu suốt ba tháng ròng rã." },
             { correct: "Dõng dạc", wrong: "Giõng giạc", example: "Bạn lớp trưởng dõng dạc đọc bài thơ." },
@@ -631,21 +715,21 @@
             { correct: "Viễn vọng", wrong: "Viển vọng", example: "Kính viễn vọng dùng để quan sát các vì sao." }
         ];
 
-        // --- DỮ LIỆU HỌC PHẦN 2: CẶP TỪ HAY NHẦM LẪN (CẢ HAI ĐỀU ĐÚNG CHÍNH TẢ) ---
+        // --- DỮ LIỆU HỌC PHẦN 2: CẶP TỪ HAY NHẦM LẪN (ĐÃ TÁCH BIỆT DẠNG LIST ĐỂ XUỐNG HÀNG) ---
         const module2Questions = [
-            { isModule2: true, context: "Điền từ vào chỗ trống: 'Cậu ấy có nét mặt thanh tú, nhìn rất ___'", optionA: "Khôi ngô", optionB: "Tuấn tú", correct: "Tuấn tú", explanation: "<b>Tuấn tú</b>: Thường chỉ gương mặt có nét thanh tú, hài hòa, thông minh (dùng cả nam và nữ). Còn <b>Khôi ngô</b> thường chỉ vẻ mặt sáng sủa, thông minh đặc trưng của nam giới." },
-            { isModule2: true, context: "Khi nói về việc giữ kín bí mật không cho ai biết, ta dùng từ nào?", optionA: "Bảo mật", optionB: "Bí mật", correct: "Bảo mật", explanation: "<b>Bảo mật</b>: Là hành động mang tính kỹ thuật, chủ động giữ an toàn thông tin (như bảo mật tài khoản). <b>Bí mật</b>: Bản chất thông tin đó không được tiết lộ." },
-            { isModule2: true, context: "Chọn từ đúng: 'Trận bóng đá diễn ra vô cùng ___'", optionA: "Kịch liệt", optionB: "Gây cấn", correct: "Gây cấn", explanation: "<b>Gây cấn</b> (hoặc Gây cấn/Kịch tính): Có nhiều tình tiết bất ngờ, hấp dẫn. <b>Kịch liệt</b>: Thể hiện mức độ mạnh mẽ, chống đối gay gắt (ví dụ: phản đối kịch liệt)." },
-            { isModule2: true, context: "Điền từ: 'Mẹ ___ khuyên nhủ con cố gắng học tập.'", optionA: "Ân cần", optionB: "Cần mẫn", correct: "Ân cần", explanation: "<b>Ân cần</b>: Thể hiện sự chu đáo, nhiệt tình, đầy tình cảm thương yêu. <b>Cần mẫn</b>: Chỉ sự chăm chỉ, chịu khó làm việc." },
-            { isModule2: true, context: "Khi một doanh nghiệp chia nhỏ vốn thành các phần bằng nhau, các phần đó gọi là:", optionA: "Cổ phần", optionB: "Cổ phiếu", correct: "Cổ phần", explanation: "<b>Cổ phần</b>: Phần vốn nhỏ nhất của công ty. <b>Cổ phiếu</b>: Chứng chỉ chứng nhận quyền sở hữu cổ phần đó." },
-            { isModule2: true, context: "Điền từ: 'Bức tranh được trang trí vô cùng ___'", optionA: "Tinh vi", optionB: "Tinh xảo", correct: "Tinh xảo", explanation: "<b>Tinh xảo</b>: Khéo léo, công phu đạt đến độ nghệ thuật cao. <b>Tinh vi</b>: Thường chỉ cấu tạo phức tạp hoặc hành vi che giấu kín đáo." },
-            { isModule2: true, context: "Chọn từ đúng: 'Bầu không khí lễ hội vô cùng ___'", optionA: "Nhộn nhịp", optionB: "Tấp nập", correct: "Nhộn nhịp", explanation: "<b>Nhộn nhịp</b>: Không khí đông vui, có nhiều âm thanh vui tươi, rộn rã. <b>Tấp nập</b>: Sự di chuyển qua lại đông đúc, liên tục của con người/xe cộ." },
-            { isModule2: true, context: "Từ nào dùng để chỉ hành vi bắt chước một cách mù quáng thiếu suy nghĩ?", optionA: "Mô phỏng", optionB: "Rập khuôn", correct: "Rập khuôn", explanation: "<b>Rập khuôn</b>: Bắt chước máy móc, không sáng tạo. <b>Mô phỏng</b>: Tái tạo lại đặc điểm, cơ chế của vật khác một cách có khoa học." },
-            { isModule2: true, context: "Điền từ: 'Anh ấy luôn hoàn thành ___ nhiệm vụ được giao.'", optionA: "Xuất sắc", optionB: "Ưu tú", correct: "Xuất sắc", explanation: "<b>Xuất sắc</b>: Đạt kết quả vượt trội vượt mức bình thường (thường bổ nghĩa cho hành động/kết quả). <b>Ưu tú</b>: Chỉ phẩm chất cá nhân nổi bật (ví dụ: Học sinh ưu tú)." },
-            { isModule2: true, context: "Từ nào chỉ việc xem qua một lượt để kiểm tra tổng thể?", optionA: "Xem xét", optionB: "Duyệt qua", correct: "Duyệt qua", explanation: "<b>Duyệt qua</b>: Nhìn lướt qua nhanh để nắm ý chính hoặc kiểm tra sơ bộ. <b>Xem xét</b>: Nghiên cứu, suy nghĩ kỹ lưỡng trước khi quyết định." }
+            { isModule2: true, context: "Điền từ vào chỗ trống: 'Cậu ấy có nét mặt thanh tú, nhìn rất ___'", optionA: "Khôi ngô", optionB: "Tuấn tú", correct: "Tuấn tú", explanation: "<ul><li><b>Tuấn tú</b>: Thường chỉ gương mặt có nét thanh tú, hài hòa, thông minh (dùng cho cả nam và nữ).</li><li><b>Khôi ngô</b>: Thường chỉ vẻ mặt sáng sủa, thông minh đặc trưng mang nét tuấn tú riêng của nam giới.</li></ul>" },
+            { isModule2: true, context: "Khi nói về việc giữ kín bí mật không cho ai biết, ta dùng từ nào?", optionA: "Bảo mật", optionB: "Bí mật", correct: "Bảo mật", explanation: "<ul><li><b>Bảo mật</b>: Là hành động mang tính kỹ thuật, chủ động giữ an toàn thông tin để tránh rò rỉ (như bảo mật tài khoản).</li><li><b>Bí mật</b>: Bản chất thông tin đó kín đáo, riêng tư, không được phép tiết lộ ra ngoài.</li></ul>" },
+            { isModule2: true, context: "Chọn từ đúng: 'Trận bóng đá diễn ra vô cùng ___'", optionA: "Kịch liệt", optionB: "Gây cấn", correct: "Gây cấn", explanation: "<ul><li><b>Gây cấn</b> (hoặc Kịch tính): Có nhiều tình tiết diễn biến bất ngờ, hồi hộp và hấp dẫn người xem.</li><li><b>Kịch liệt</b>: Thể hiện mức độ mạnh mẽ, chống đối vô cùng gay gắt (ví dụ: phản đối kịch liệt).</li></ul>" },
+            { isModule2: true, context: "Điền từ: 'Mẹ ___ khuyên nhủ con cố gắng học tập.'", optionA: "Ân cần", optionB: "Cần mẫn", correct: "Ân cần", explanation: "<ul><li><b>Ân cần</b>: Thể hiện sự chu đáo, nhiệt tình, đầy tình cảm yêu thương trìu mến.</li><li><b>Cần mẫn</b>: Chỉ sự chăm chỉ, nhẫn nại, chịu khó và tỉ mỉ làm việc.</li></ul>" },
+            { isModule2: true, context: "Khi một doanh nghiệp chia nhỏ vốn thành các phần bằng nhau, các phần đó gọi là:", optionA: "Cổ phần", optionB: "Cổ phiếu", correct: "Cổ phần", explanation: "<ul><li><b>Cổ phần</b>: Phần vốn nhỏ nhất của một công ty cổ phần được chia đều ra.</li><li><b>Cổ phiếu</b>: Chứng chỉ hoặc bút toán chứng nhận quyền sở hữu một hoặc nhiều cổ phần đó.</li></ul>" },
+            { isModule2: true, context: "Điền từ: 'Bức tranh được trang trí vô cùng ___'", optionA: "Tinh vi", optionB: "Tinh xảo", correct: "Tinh xảo", explanation: "<ul><li><b>Tinh xảo</b>: Khéo léo, công phu, tỉ mỉ đạt đến trình độ kỹ thuật nghệ thuật cao.</li><li><b>Tinh vi</b>: Thường chỉ cấu tạo rất phức tạp, nhỏ bé hoặc hành vi che giấu vô cùng kín đáo.</li></ul>" },
+            { isModule2: true, context: "Chọn từ đúng: 'Bầu không khí lễ hội vô cùng ___'", optionA: "Nhộn nhịp", optionB: "Tấp nập", correct: "Nhộn nhịp", explanation: "<ul><li><b>Nhộn nhịp</b>: Không khí đông vui, nhộn nhịp, chứa nhiều âm thanh vui tươi, rộn rã.</li><li><b>Tấp nập</b>: Sự di chuyển qua lại liên tục, đông đúc chen chúc của con người hoặc xe cộ.</li></ul>" },
+            { isModule2: true, context: "Từ nào dùng để chỉ hành vi bắt chước một cách mù quáng thiếu suy nghĩ?", optionA: "Mô phỏng", optionB: "Rập khuôn", correct: "Rập khuôn", explanation: "<ul><li><b>Rập khuôn</b>: Bắt chước một cách máy móc, cứng nhắc, hoàn toàn không có sự sáng tạo.</li><li><b>Mô phỏng</b>: Tái tạo lại các đặc điểm, mô hình hoặc cơ chế của vật khác một cách có khoa học.</li></ul>" },
+            { isModule2: true, context: "Điền từ: 'Anh ấy luôn hoàn thành ___ nhiệm vụ được giao.'", optionA: "Xuất sắc", optionB: "Ưu tú", correct: "Xuất sắc", explanation: "<ul><li><b>Xuất sắc</b>: Đạt kết quả vượt trội, hoàn hảo vượt mức bình thường (bổ nghĩa cho hành động/kết quả).</li><li><b>Ưu tú</b>: Chỉ phẩm chất cá nhân xuất chúng, nổi bật, tốt đẹp nhất (ví dụ: Học sinh ưu tú).</li></ul>" },
+            { isModule2: true, context: "Từ nào chỉ việc xem qua một lượt để kiểm tra tổng thể?", optionA: "Xem xét", optionB: "Duyệt qua", correct: "Duyệt qua", explanation: "<ul><li><b>Duyệt qua</b>: Nhìn lướt qua nhanh chóng để nắm bắt ý chính hoặc kiểm tra sơ bộ bề mặt.</li><li><b>Xem xét</b>: Nghiên cứu, quan sát và suy nghĩ kỹ lưỡng mọi khía cạnh trước khi đưa ra quyết định.</li></ul>" }
         ];
 
-        // --- DANH SÁCH 25 CÂU NÓI TRUYỀN ĐỘNG LỰC THI CỬ MỚI ---
+        // --- DANH SÁCH CÂU NÓI TRUYỀN ĐỘNG LỰC ---
         const motivationQuotes = [
             "Thà để giọt mồ hôi rơi trên trang sách còn hơn là giọt nước mắt rơi trên đề thi.",
             "Đừng xấu hổ khi bạn không biết, ta chỉ xấu hổ khi không học.",
@@ -666,7 +750,6 @@
             "Học tập không phải là con đường duy nhất để dẫn đến thành công. Nhưng nó là con đường nhanh nhất giúp bạn chạm được những giấc mơ và vị trí cao hơn. Đứng ở nơi người khác không với tới.",
             "Không ai sinh ra đã giỏi, cũng chẳng ai sinh ra đã có kiến thức và tri thức trong đầu. Tất cả đều trải qua quá trình tôi luyện, học hỏi và cố gắng. Nếu hôm nay bạn không học, bạn đã đánh mất cơ hội để thành công của mình. Đừng mãi vô định trong tương lai, đứng dậy và học tập ngay thôi.",
             "Để thành công, khao khát thành công của bạn phải lớn hơn nỗi sợ thất bại.",
-            "Thà để giọt mồ hôi rơi trên trang sách còn hơn để giọt nước mắt rơi trên đề thi.",
             "Thất bại không đáng sợ, điều đáng sợ nhất là bạn không có dũng khí đối diện với nó.",
             "Cuộc đời do chính các bạn quyết định. Đừng lãng phí thời gian tuyệt vời mà cuộc sống ban tặng cho.",
             "Không bao giờ là quá muộn nếu như bạn muốn thay đổi và trở thành phiên bản tốt nhất của mình.",
@@ -722,7 +805,7 @@
         // Đổi câu truyền động lực ngẫu nhiên từ danh sách
         function changeMotivationQuote() {
             const randomIndex = Math.floor(Math.random() * motivationQuotes.length);
-            document.getElementById("motivation-quote").innerText = `“ ${motivationQuotes[randomIndex]} ”`;
+            document.getElementById("motivation-quote").innerText = `${motivationQuotes[randomIndex]}`;
         }
 
         // Chuyển đổi qua lại giữa Học phần 1 và Học phần 2
@@ -734,14 +817,12 @@
             if (moduleNum === 1) {
                 group1.style.display = 'grid';
                 group2.style.display = 'none';
-                // Reset số câu mặc định về 20
                 selectedCount = 20;
                 document.querySelectorAll('#group-count-1 .select-btn').forEach(b => b.classList.remove('active'));
                 document.querySelector('#group-count-1 .select-btn').classList.add('active');
             } else {
                 group1.style.display = 'none';
                 group2.style.display = 'grid';
-                // Reset số câu mặc định về 2
                 selectedCount = 2;
                 document.querySelectorAll('#group-count-2 .select-btn').forEach(b => b.classList.remove('active'));
                 document.querySelector('#group-count-2 .select-btn').classList.add('active');
@@ -891,9 +972,8 @@
             optionsContainer.innerHTML = '';
 
             if (q.isModule2) {
-                // Giao diện câu hỏi cho Học phần 2
                 document.getElementById('title-quiz').innerText = "Phân Biệt Cặp Từ Dùng Nhầm Lẫn 💡";
-                document.getElementById('explanation-title').innerHTML = "💡 Giải thích ngữ nghĩa từ chuẩn:";
+                document.getElementById('explanation-title').innerHTML = "💡 Phân biệt chi tiết ý nghĩa từ chuẩn:";
                 if (isWrongPracticeMode) {
                     qBox.innerHTML = `🎯 <b>Ôn tập câu sai:</b> ${q.context}`;
                 } else {
@@ -914,7 +994,6 @@
                 });
 
             } else {
-                // Giao diện câu hỏi cho Học phần 1
                 document.getElementById('title-quiz').innerText = "Thử Thách Từ Đúng Chính Tả 📝";
                 document.getElementById('explanation-title').innerHTML = "💡 Giải thích từ chính xác:";
                 if (isWrongPracticeMode) {
@@ -954,9 +1033,8 @@
                 playSound('wrong');
                 wrongQuestions.push(q);
 
-                // Hiển thị đáp án đúng cho người dùng thấy
                 Array.from(document.getElementById('options').children).forEach(btn => {
-                    let targetText = q.isModule2 ? q.correct : q.correct;
+                    let targetText = q.correct;
                     if (btn.innerText.includes(targetText)) {
                         btn.classList.add('correct');
                     }
